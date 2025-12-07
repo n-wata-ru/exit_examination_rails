@@ -78,6 +78,8 @@
 
 ## 差別化ポイント
 
-- ChatGPT連携による「好み分析」や「おすすめ豆の提案」
+- 類似アプリ
+  - https://play.google.com/store/apps/details?id=jp.fumitei.coffee&pli=1
+- 登録した珈琲豆からChatGPT連携による「好み分析」や「おすすめ豆の提案」
 - 産地や購入店を**地図で可視化**し、偏りや傾向を直感的に理解
 - お店情報・接客体験などの記録も含めた
