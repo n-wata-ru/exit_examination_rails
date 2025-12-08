@@ -88,3 +88,11 @@
 ## 画面遷移図
 
 - https://www.figma.com/design/7Oz0oFVOuzbNWk59fEsVt1/My-Coffee-Note?node-id=0-1&p=f&t=0l9GczazbKCsq8CO-0
+
+## READMEに記載した機能
+
+### MVP（最小実用機能）
+- [ ] 豆の基本情報（品種・精製・焙煎度など）の登録
+- [ ] 飲んだ感想や味の評価を記録
+- [ ] 購入したお店の名前・住所を登録
+
