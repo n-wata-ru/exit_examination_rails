@@ -1,12 +1,12 @@
 @startuml
-entity User {
+entity Users {
   *id : bigint
   *name : string
   *email : string
   *encrypted_password : string
 }
 
-entity CoffeeBean {
+entity CoffeeBeans {
   *id : bigint
   *name : string
   *variety : string
@@ -17,7 +17,7 @@ entity CoffeeBean {
   *image : string
 }
 
-entity TastingNote {
+entity TastingNotes {
   *id : bigint
   *user_id : bigint
   *coffee_bean_id : bigint
@@ -30,7 +30,7 @@ entity TastingNote {
   *taste_notes : text
 }
 
-entity Shop {
+entity Shops {
   *id : bigint
   *name : string
   *address : string
@@ -38,7 +38,7 @@ entity Shop {
   *notes : text
 }
 
-entity Origin {
+entity Origins {
   *id : bigint
   *country : string
   *region : string
@@ -46,8 +46,8 @@ entity Origin {
   *notes : text
 }
 
-User ||--o{ TastingNote
-CoffeeBean ||--o{ TastingNote
-Shop ||--o{ TastingNote
-Origin ||--o{ CoffeeBean
+Users ||--o{ TastingNotes
+CoffeeBeans ||--o{ TastingNotes
+Shops ||--o{ TastingNotes
+Origins ||--o{ CoffeeBeans
 @enduml
