@@ -1,0 +1,53 @@
+@startuml
+entity User {
+  *id : bigint
+  *name : string
+  *email : string
+  *encrypted_password : string
+}
+
+entity CoffeeBean {
+  *id : bigint
+  *name : string
+  *variety : string
+  *process : string
+  *roast_level : string
+  *origin_id : bigint
+  *notes : text
+  *image : string
+}
+
+entity TastingNote {
+  *id : bigint
+  *user_id : bigint
+  *coffee_bean_id : bigint
+  *shop_id : bigint
+  *brew_method : string
+  *preference_score : integer
+  *acidity_score : integer
+  *bitterness_score : integer
+  *sweetness_score : integer
+  *taste_notes : text
+}
+
+entity Shop {
+  *id : bigint
+  *name : string
+  *address : string
+  *url : string
+  *notes : text
+}
+
+entity Origin {
+  *id : bigint
+  *country : string
+  *region : string
+  *farm_name : string
+  *notes : text
+}
+
+User ||--o{ TastingNote
+CoffeeBean ||--o{ TastingNote
+Shop ||--o{ TastingNote
+Origin ||--o{ CoffeeBean
+@enduml
