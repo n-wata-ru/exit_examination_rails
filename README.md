@@ -84,3 +84,7 @@
   - 登録した珈琲豆からChatGPT連携による「好み分析」や「おすすめ豆の提案」
   - 産地や購入店を**地図で可視化**し、偏りや傾向を直感的に理解
   - お店情報・接客体験などの記録も含めた
+
+## 画面遷移図
+
+- https://www.figma.com/design/7Oz0oFVOuzbNWk59fEsVt1/My-Coffee-Note?node-id=0-1&p=f&t=0l9GczazbKCsq8CO-0
