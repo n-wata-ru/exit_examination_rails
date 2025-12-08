@@ -88,3 +88,7 @@
 ## 画面遷移図
 
 - https://www.figma.com/design/7Oz0oFVOuzbNWk59fEsVt1/My-Coffee-Note?node-id=0-1&p=f&t=0l9GczazbKCsq8CO-0
+
+## ER図
+
+[![Image from Gyazo](https://i.gyazo.com/0c732bff6ffdd04733756d27746cd191.png)](https://gyazo.com/0c732bff6ffdd04733756d27746cd191)
