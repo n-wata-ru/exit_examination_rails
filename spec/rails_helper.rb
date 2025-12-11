@@ -88,6 +88,10 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+  # Deviseのテストヘルパーを有効化
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end
 
 # Shoulda Matchers configuration
