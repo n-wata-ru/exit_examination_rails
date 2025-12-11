@@ -21,6 +21,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # ログイン後のリダイレクト先
+  def after_sign_in_path_for(resource)
+    authenticated_root_path  # home#index
+  end
+
+  # ログアウト後のリダイレクト先
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
+
   def configure_permitted_parameters
     # サインアップ時にnameパラメータを許可
     # deviseのデフォルトでは :email と :password :password_confirmation しか許可されないため
