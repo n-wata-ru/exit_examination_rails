@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # テーブルと同じ複数形のリソース名を使う
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,6 +11,9 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # root path route ("/") にアクセスした時の動作を設定
+  # SessionsController の new アクションを呼び出す
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
 end
