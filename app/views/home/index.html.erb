@@ -1,0 +1,73 @@
+<div class="min-h-screen bg-gray-50">
+  <!-- ヘッダー -->
+  <header class="bg-white shadow">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-gray-800">コーヒー豆管理アプリ</h1>
+        
+        <div class="flex items-center space-x-4">
+          <span class="text-gray-600">ようこそ、<span class="font-medium"><%= current_user.name %></span>さん</span>
+          <%= link_to "アカウント編集", edit_user_registration_path, class: "text-indigo-600 hover:text-indigo-800" %>
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, 
+              class: "bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-200" %>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="container mx-auto px-6 py-12">
+    <div class="max-w-4xl mx-auto">
+      <!-- ウェルカムメッセージ -->
+      <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">ダッシュボード</h2>
+        <p class="text-gray-600 mb-6">ログインに成功しました！コーヒー豆の管理を始めましょう。</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- コーヒー豆カード -->
+          <div class="bg-indigo-50 rounded-lg p-6 text-center">
+            <div class="text-4xl mb-3">☕</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">コーヒー豆</h3>
+            <p class="text-gray-600 text-sm mb-4">登録された豆を管理</p>
+            <span class="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">準備中</span>
+          </div>
+
+          <!-- 産地カード -->
+          <div class="bg-green-50 rounded-lg p-6 text-center">
+            <div class="text-4xl mb-3">🌍</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">産地</h3>
+            <p class="text-gray-600 text-sm mb-4">産地情報を管理</p>
+            <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">準備中</span>
+          </div>
+
+          <!-- ショップカード -->
+          <div class="bg-yellow-50 rounded-lg p-6 text-center">
+            <div class="text-4xl mb-3">🏪</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">ショップ</h3>
+            <p class="text-gray-600 text-sm mb-4">購入店舗を管理</p>
+            <span class="inline-block bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">準備中</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ユーザー情報 -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">あなたの情報</h3>
+        <dl class="space-y-3">
+          <div class="flex border-b pb-3">
+            <dt class="w-32 font-medium text-gray-600">名前</dt>
+            <dd class="text-gray-800"><%= current_user.name %></dd>
+          </div>
+          <div class="flex border-b pb-3">
+            <dt class="w-32 font-medium text-gray-600">メールアドレス</dt>
+            <dd class="text-gray-800"><%= current_user.email %></dd>
+          </div>
+          <div class="flex">
+            <dt class="w-32 font-medium text-gray-600">登録日</dt>
+            <dd class="text-gray-800"><%= l current_user.created_at, format: :long %></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </main>
+</div>
