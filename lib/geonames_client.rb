@@ -21,12 +21,18 @@ class GeonamesClient
     }
     uri.query = URI.encode_www_form(params)
 
+    puts "DEBUG: Requesting URL: #{uri}"
     response = Net::HTTP.get_response(uri)
+    puts "DEBUG: Response code: #{response.code}"
+    puts "DEBUG: Response body: #{response.body[0..200]}" # 最初の200文字だけ表示
+
     return nil unless response.is_a?(Net::HTTPSuccess)
 
     data = JSON.parse(response.body)
     data["geonames"]&.first
   rescue => e
+    puts "ERROR: #{e.class} - #{e.message}"
+    puts "ERROR: Backtrace: #{e.backtrace.first(3).join("\n")}"
     Rails.logger.error "GeoNames API Error: #{e.message}"
     nil
   end

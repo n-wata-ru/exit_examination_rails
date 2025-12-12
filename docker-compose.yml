@@ -29,6 +29,8 @@ services:
       - /rails/tmp
       - /rails/log
       - /rails/.git
+    env_file:
+      - .env
     environment:
       TZ: Asia/Tokyo
       DATABASE_URL: postgres://postgres:password@db:5432/exit_examination_rails_development
