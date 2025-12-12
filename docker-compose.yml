@@ -33,7 +33,10 @@ services:
       - .env
     environment:
       TZ: Asia/Tokyo
-      DATABASE_URL: postgres://postgres:password@db:5432/exit_examination_rails_development
+      # DATABASE_URL: postgres://postgres:password@db:5432/exit_examination_rails_development
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     ports:
       - "3000:3000"
     depends_on:
