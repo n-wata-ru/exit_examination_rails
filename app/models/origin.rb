@@ -14,11 +14,9 @@ class Origin < ApplicationRecord
     less_than_or_equal_to: 180
   }, allow_nil: true
 
-  # Scopes
-  scope :with_coordinates, -> { where.not(latitude: nil, longitude: nil) }
-
-  # 表示用メソッド
+  # 表示用メソッド：compactでnilを取り除き、rejectで空文字を取り除き、joinで結合
+  # 取り除かれると["Brazil"].join(" - ") => "Brazil"となり連結がされない
   def display_name
-    [ country, region ].compact.join(" - ")
+    [ country, region ].compact.reject(&:blank?).join(" - ")
   end
 end

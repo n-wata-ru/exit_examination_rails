@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   # ログイン済みユーザーのルート
   authenticated :user do
-    root to: "home#index", as: :authenticated_root
+    root to: "coffee_beans#index", as: :authenticated_root
   end
 
   # ログインしていないユーザーのルート
@@ -20,4 +20,7 @@ Rails.application.routes.draw do
       root to: "devise/sessions#new"
     end
   end
+
+  # コーヒー豆管理機能のルーティング
+  resources :coffee_beans, only: [ :index, :new, :create, :edit, :update, :destroy ]
 end
