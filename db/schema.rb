@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_08_090456) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_12_074332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,7 +19,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_08_090456) do
     t.string "image"
     t.string "name"
     t.text "notes"
-    t.bigint "origin_id", null: false
+    t.bigint "origin_id"
     t.string "process"
     t.string "roast_level"
     t.datetime "updated_at", null: false
@@ -29,11 +29,17 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_08_090456) do
 
   create_table "origins", force: :cascade do |t|
     t.string "country"
+    t.string "country_code", limit: 2
     t.datetime "created_at", null: false
     t.string "farm_name"
+    t.integer "geonames_id"
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.text "notes"
     t.string "region"
     t.datetime "updated_at", null: false
+    t.index ["country_code"], name: "index_origins_on_country_code"
+    t.index ["geonames_id"], name: "index_origins_on_geonames_id", unique: true
   end
 
   create_table "shops", force: :cascade do |t|

@@ -1,8 +1,11 @@
 class CoffeeBean < ApplicationRecord
   # Associations
-  belongs_to :origin
+  belongs_to :origin, optional: true
   has_many :tasting_notes, dependent: :destroy
 
   # Validations
   validates :name, presence: true
+
+  # origin_idがある場合のみ、Originが存在することを確認
+  validates :origin, presence: true, if: -> { origin_id.present? }
 end
