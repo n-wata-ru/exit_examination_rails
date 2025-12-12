@@ -18,7 +18,7 @@ class CoffeeBeansController < ApplicationController
     @coffee_bean = CoffeeBean.new(coffee_bean_params)
 
     if @coffee_bean.save
-      redirect_to @coffee_bean, notice: "コーヒー豆を登録しました"
+      redirect_to coffee_beans_path, notice: "コーヒー豆を登録しました"
     else
       @origins = Origin.all
       render :new, status: :unprocessable_entity
@@ -28,8 +28,13 @@ class CoffeeBeansController < ApplicationController
   def edit
   end
 
-  def update
+def update
+  if @coffee_bean.update(coffee_bean_params)
+    redirect_to coffee_beans_path, notice: "コーヒー豆を更新しました"
+  else
+    render :edit, status: :unprocessable_entity
   end
+end
 
   def destroy
   end
