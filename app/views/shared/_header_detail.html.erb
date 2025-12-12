@@ -1,11 +1,13 @@
-<header class="bg-white border-b border-gray-200 sticky top-0 z-10 w-full">
+<header class="bg-white border-b border-gray-200 sticky top-0 z-10 w-full min-h-[48px]">
   <div class="flex items-center justify-between px-4 py-3">
     <!-- 左：戻るボタン -->
     <div class="flex-1">
-      <%= link_to coffee_beans_path, class: "flex items-center text-gray-700 hover:text-gray-900" do %>
-        <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-        </svg>
+      <% if @coffee_bean&.persisted? %>
+        <%= link_to coffee_beans_path, class: "flex items-center text-gray-700 hover:text-gray-900" do %>
+          <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        <% end %>
       <% end %>
     </div>
 
@@ -16,7 +18,7 @@
 
     <!-- 右：削除ボタン -->
     <div class="flex-1 flex justify-end">
-      <% if @coffee_bean.persisted? %>
+      <% if @coffee_bean&.persisted? %>
         <%= button_to coffee_bean_path(@coffee_bean), 
             method: :delete,
             data: { turbo_confirm: "本当に削除しますか？" },
