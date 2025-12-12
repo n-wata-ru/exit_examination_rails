@@ -37,6 +37,8 @@ def update
 end
 
   def destroy
+    @coffee_bean.destroy
+    redirect_to coffee_beans_path, notice: "コーヒー豆を削除しました"
   end
 
   private
