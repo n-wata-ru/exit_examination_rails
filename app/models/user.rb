@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # Associations
+  has_many :coffee_beans, dependent: :destroy
   has_many :tasting_notes, dependent: :destroy
 
   # Validations

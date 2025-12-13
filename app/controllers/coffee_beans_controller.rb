@@ -4,18 +4,18 @@ class CoffeeBeansController < ApplicationController
   before_action :set_origins, only: %i[new create edit update]
 
   def index
-    @coffee_beans = CoffeeBean.all
+    @coffee_beans = current_user.coffee_beans.includes(:origin)
   end
 
   def show
   end
 
   def new
-    @coffee_bean = CoffeeBean.new
+    @coffee_bean = current_user.coffee_beans.build
   end
 
   def create
-    @coffee_bean = CoffeeBean.new(coffee_bean_params)
+    @coffee_bean = current_user.coffee_beans.build(coffee_bean_params)
 
     if @coffee_bean.save
       redirect_to coffee_beans_path, notice: "コーヒー豆を登録しました"
@@ -44,7 +44,7 @@ end
   private
 
   def set_coffee_bean
-    @coffee_bean = CoffeeBean.find(params[:id])
+    @coffee_bean = current_user.coffee_beans.find(params[:id])
   end
 
   def set_origins

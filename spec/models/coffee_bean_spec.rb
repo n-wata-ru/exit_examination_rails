@@ -2,17 +2,21 @@ require 'rails_helper'
 
 RSpec.describe CoffeeBean, type: :model do
   describe 'associations' do
+    it { should belong_to(:user) }
     it { should belong_to(:origin).optional }
     it { should have_many(:tasting_notes).dependent(:destroy) }
   end
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:user) }
 
     describe 'origin validation' do
+      let(:user) { FactoryBot.create(:user) }
+
       context 'origin_idがnilの場合' do
         it 'originがnilでも有効であること' do
-          coffee_bean = CoffeeBean.new(name: 'Test Bean', origin_id: nil)
+          coffee_bean = CoffeeBean.new(name: 'Test Bean', origin_id: nil, user: user)
           expect(coffee_bean).to be_valid
         end
       end
@@ -21,12 +25,12 @@ RSpec.describe CoffeeBean, type: :model do
         let(:origin) { Origin.create!(country: 'Ethiopia') }
 
         it 'validなoriginであれば保存できること' do
-          coffee_bean = CoffeeBean.new(name: 'Test Bean', origin: origin)
+          coffee_bean = CoffeeBean.new(name: 'Test Bean', origin: origin, user: user)
           expect(coffee_bean).to be_valid
         end
 
         it 'origin_idが設定されている場合、有効なoriginが必要であること' do
-          coffee_bean = CoffeeBean.new(name: 'Test Bean', origin_id: 99999)
+          coffee_bean = CoffeeBean.new(name: 'Test Bean', origin_id: 99999, user: user)
           expect(coffee_bean).not_to be_valid
           expect(coffee_bean.errors[:origin]).to be_present
         end
@@ -35,10 +39,10 @@ RSpec.describe CoffeeBean, type: :model do
   end
 
   describe 'dependent destroy' do
-    let(:coffee_bean) { CoffeeBean.create!(name: 'Test Bean') }
+    let(:user) { FactoryBot.create(:user) }
+    let(:coffee_bean) { FactoryBot.create(:coffee_bean, user: user) }
 
     it 'destroys associated tasting_notes when coffee_bean is destroyed' do
-      user = User.create!(name: 'Test User', email: 'test@example.com', password: 'password')
       tasting_note = coffee_bean.tasting_notes.create!(
         user: user,
         preference_score: 5
