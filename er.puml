@@ -4,6 +4,11 @@ entity Users {
   *name : string
   *email : string
   *encrypted_password : string
+  reset_password_token : string
+  reset_password_sent_at : datetime
+  remember_created_at : datetime
+  created_at : datetime
+  updated_at : datetime
 }
 
 entity CoffeeBeans {
@@ -12,40 +17,54 @@ entity CoffeeBeans {
   *variety : string
   *process : string
   *roast_level : string
+  *user_id : bigint
   *origin_id : bigint
   *notes : text
   *image : string
+  created_at : datetime
+  updated_at : datetime
 }
 
 entity TastingNotes {
   *id : bigint
   *user_id : bigint
   *coffee_bean_id : bigint
-  *shop_id : bigint
-  *brew_method : string
-  *preference_score : integer
-  *acidity_score : integer
-  *bitterness_score : integer
-  *sweetness_score : integer
-  *taste_notes : text
+  shop_id : bigint
+  brew_method : string
+  preference_score : integer
+  acidity_score : integer
+  bitterness_score : integer
+  sweetness_score : integer
+  taste_notes : text
+  created_at : datetime
+  updated_at : datetime
 }
 
 entity Shops {
   *id : bigint
   *name : string
-  *address : string
-  *url : string
-  *notes : text
+  address : string
+  url : string
+  notes : text
+  created_at : datetime
+  updated_at : datetime
 }
 
 entity Origins {
   *id : bigint
-  *country : string
-  *region : string
-  *farm_name : string
-  *notes : text
+  country : string
+  country_code : string(2)
+  region : string
+  farm_name : string
+  geonames_id : integer
+  latitude : decimal(10,6)
+  longitude : decimal(10,6)
+  notes : text
+  created_at : datetime
+  updated_at : datetime
 }
 
+Users ||--o{ CoffeeBeans
 Users ||--o{ TastingNotes
 CoffeeBeans ||--o{ TastingNotes
 Shops ||--o{ TastingNotes
