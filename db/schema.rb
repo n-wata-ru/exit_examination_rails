@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_12_074332) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_13_073738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,8 +23,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_12_074332) do
     t.string "process"
     t.string "roast_level"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.string "variety"
     t.index ["origin_id"], name: "index_coffee_beans_on_origin_id"
+    t.index ["user_id"], name: "index_coffee_beans_on_user_id"
   end
 
   create_table "origins", force: :cascade do |t|
@@ -82,6 +84,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_12_074332) do
   end
 
   add_foreign_key "coffee_beans", "origins"
+  add_foreign_key "coffee_beans", "users"
   add_foreign_key "tasting_notes", "coffee_beans"
   add_foreign_key "tasting_notes", "shops"
   add_foreign_key "tasting_notes", "users"

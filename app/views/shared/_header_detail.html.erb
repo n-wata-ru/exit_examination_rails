@@ -30,6 +30,11 @@
           </svg>
         <% end %>
       <% end %>
+      <% if local_assigns[:show_logout_button] %>
+        <%= button_to "ログアウト", destroy_user_session_path,
+          method: :delete,
+          class: "flex items-center text-gray-700 hover:text-gray-900 cursor-pointer" %>
+      <% end %>
     </div>
   </div>
 </header>
