@@ -2,14 +2,17 @@
 
 ## users
 
-| カラム名               | 型        | 説明             |
-| ------------------ | -------- | -------------- |
-| id                 | bigint   | 主キー            |
-| name               | string   | ニックネームなど       |
-| email              | string   | Devise用メールアドレス |
-| encrypted_password | string   | パスワード (Devise) |
-| created_at         | datetime | 作成日時           |
-| updated_at         | datetime | 更新日時           |
+| カラム名                 | 型        | 説明                    |
+| ---------------------- | -------- | --------------------- |
+| id                     | bigint   | 主キー                   |
+| name                   | string   | ニックネームなど              |
+| email                  | string   | Devise用メールアドレス        |
+| encrypted_password     | string   | パスワード (Devise)        |
+| reset_password_token   | string   | パスワードリセットトークン (Devise) |
+| reset_password_sent_at | datetime | パスワードリセット送信日時 (Devise) |
+| remember_created_at    | datetime | ログイン記憶日時 (Devise)     |
+| created_at             | datetime | 作成日時                  |
+| updated_at             | datetime | 更新日時                  |
 
 ---
 
@@ -22,6 +25,7 @@
 | variety         | string    | 品種として、ブルボン、ゲイシャなど       |
 | process         | string    | 精製方法（ナチュラル / ウォッシュド）    |
 | roast_level     | string    | 焙煎度（浅煎り / 中煎り / シティ）      |
+| user_id         | bigint    | `users`テーブルへの外部キー (NOT NULL) |
 | origin_id       | bigint    | `origins`テーブルへの外部キー     |
 | notes           | text      | フレーバーノートや備考             |
 | image           | string    | 豆の画像（ActiveStorage想定）  |
@@ -65,12 +69,16 @@
 
 ## origins
 
-| カラム名     | 型        | 説明                              |
-| ------------ | --------- | --------------------------------- |
-| id           | bigint    | 主キー                             |
-| country      | string    | 国名（例: エチオピア）               |
-| region       | string    | 地域（例: グジ）                    |
-| farm_name    | string    | 農園名（例: トレスポソス）             |
-| notes        | text      | 備考（標高、生産者、ロット情報など）     |
-| created_at   | datetime  | 作成日時                            |
-| updated_at   | datetime  | 更新日時                            |
+| カラム名       | 型              | 説明                              |
+| ------------ | --------------- | --------------------------------- |
+| id           | bigint          | 主キー                             |
+| country      | string          | 国名（例: エチオピア）               |
+| country_code | string(2)       | ISO 3166-1 alpha-2 国コード (例: ET) |
+| region       | string          | 地域（例: グジ）                    |
+| farm_name    | string          | 農園名（例: トレスポソス）             |
+| geonames_id  | integer         | GeoNames APIのID                   |
+| latitude     | decimal(10, 6)  | 緯度                               |
+| longitude    | decimal(10, 6)  | 経度                               |
+| notes        | text            | 備考（標高、生産者、ロット情報など）     |
+| created_at   | datetime        | 作成日時                            |
+| updated_at   | datetime        | 更新日時                            |

@@ -91,7 +91,10 @@
 
 ## ER図
 
-[![Image from Gyazo](https://i.gyazo.com/0c732bff6ffdd04733756d27746cd191.png)](https://gyazo.com/0c732bff6ffdd04733756d27746cd191)
+er.puml を次のサービスでER図を表示
+https://kroki.io/
+
+[![Image from Gyazo](https://i.gyazo.com/f88d65964732b3278d65f73f9a581250.png)](https://gyazo.com/f88d65964732b3278d65f73f9a581250)
 
 ## Project
 
