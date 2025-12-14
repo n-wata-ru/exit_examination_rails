@@ -22,12 +22,25 @@
           placeholder: "例：エチオピア イルガチェフェ" %>
     </div>
 
+    <!-- 画像 -->
+    <div>
+      <%= f.label :image, "画像", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= f.file_field :image, 
+          accept: "image/*",
+          class: "bg-gray-200 hover:bg-gray-300 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer" %>
+      <% if @coffee_bean.image.attached? && @coffee_bean.image.attached? %>
+        <div class="mt-2">
+          <%= image_tag @coffee_bean.image.variant(resize_to_limit: [200, 200]), class: "rounded-lg" %>
+        </div>
+      <% end %>
+    </div>
+
     <!-- 産地 -->
     <div>
       <%= f.label :origin_id, "産地", class: "block text-sm font-medium text-gray-700 mb-2" %>
       <%= f.collection_select :origin_id, @origins, :id, :country, 
           { prompt: "産地を選択してください" },
-          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" %>
+          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer" %>
     </div>
 
     <!-- 品種 -->
@@ -44,7 +57,7 @@
       <%= f.select :process, 
           ["ナチュラル", "ウォッシュド", "ハニー", "アナエロビック", "カーボニックマセレーション", "スマトラ式", "その他"],
           { include_blank: "処理方法を選択してください" },
-          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" %>
+          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer" %>
     </div>
 
     <!-- 焙煎度 -->
@@ -53,7 +66,7 @@
       <%= f.select :roast_level,
           ["浅煎り", "中煎り", "中深煎り", "深煎り"],
           { include_blank: "焙煎度を選択してください" },
-          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" %>
+          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer" %>
     </div>
     <!-- 焙煎度（詳細） -->
     <%# <%= f.select :roast_level,
@@ -74,7 +87,7 @@
       <button
         onclick="history.back()"
         type="button"
-        class="flex-1 bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200 text-center"
+        class="flex-1 bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200 text-center cursor-pointer"
       >
         キャンセル
       </button>

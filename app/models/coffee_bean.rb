@@ -3,6 +3,7 @@ class CoffeeBean < ApplicationRecord
   belongs_to :user
   belongs_to :origin, optional: true
   has_many :tasting_notes, dependent: :destroy
+  has_one_attached :image
 
   # Validations
   validates :name, presence: true

@@ -6,6 +6,13 @@
       <div class="mb-6">
         <h1 class="text-3xl font-bold text-gray-800 mb-4"><%= @coffee_bean.name %></h1>
         
+        <!-- 画像 -->
+        <% if @coffee_bean.image.attached? %>
+          <div class="mb-6">
+            <%= image_tag @coffee_bean.image.variant(resize_to_limit: [600, 400]), class: "w-full rounded-lg object-cover" %>
+          </div>
+        <% end %>
+        
         <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <% if @coffee_bean.origin.present? %>
             <div>
