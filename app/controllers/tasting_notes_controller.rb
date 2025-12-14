@@ -18,6 +18,14 @@ class TastingNotesController < ApplicationController
     @tasting_note = @coffee_bean.tasting_notes.build(tasting_note_params)
     @tasting_note.user = current_user
 
+    # 新規店舗情報があれば作成
+    if params[:shop] && params[:shop][:name].present?
+      shop = Shop.find_or_create_by(name: params[:shop][:name]) do |s|
+        s.address = params[:shop][:address]
+      end
+      @tasting_note.shop = shop
+    end
+
     if @tasting_note.save
       redirect_to coffee_bean_path(@coffee_bean), notice: "テイスティングノートを登録しました"
     else
@@ -29,6 +37,14 @@ class TastingNotesController < ApplicationController
   end
 
   def update
+    # 新規店舗情報があれば作成
+    if params[:shop] && params[:shop][:name].present?
+      shop = Shop.find_or_create_by(name: params[:shop][:name]) do |s|
+        s.address = params[:shop][:address]
+      end
+      @tasting_note.shop = shop
+    end
+
     if @tasting_note.update(tasting_note_params)
       redirect_to tasting_note_path(@tasting_note), notice: "テイスティングノートを更新しました"
     else
