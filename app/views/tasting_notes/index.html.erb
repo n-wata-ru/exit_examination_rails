@@ -11,77 +11,80 @@
       <div class="grid grid-cols-1 gap-6">
         <% @tasting_notes.each do |tasting_note| %>
           <div class="bg-white rounded-lg hover:shadow-lg transition duration-200">
-						<%= link_to tasting_note_path(tasting_note), class: "grid grid-cols-[1fr_40px] items-center py-4 pl-4" do %>
+			<%= link_to tasting_note_path(tasting_note), class: "grid grid-cols-[1fr_40px] items-center py-4 pl-4" do %>
+				<div>
+					<div class="mb-3">
+						<h3 class="text-xl font-semibold text-gray-800 mb-1">
+								<%= tasting_note.coffee_bean.name %>
+						</h3>
+						<% if tasting_note.brew_method.present? %>
+							<p class="text-sm text-gray-500">抽出方法: <%= tasting_note.brew_method %></p>
+						<% end %>
+						<% if tasting_note.shop.present? %>
+							<p class="text-sm text-indigo-600"><%= tasting_note.shop.name %></p>
+						<% end %>
+					</div>
+
+					<!-- 評価スコア -->
+					<div class="grid grid-cols-2 gap-3 mb-3">
+						<% if tasting_note.preference_score.present? %>
 							<div>
-								<div class="mb-3">
-									<h3 class="text-xl font-semibold text-gray-800 mb-1">
-											<%= tasting_note.coffee_bean.name %>
-									</h3>
-									<% if tasting_note.brew_method.present? %>
-										<p class="text-sm text-gray-500">抽出方法: <%= tasting_note.brew_method %></p>
-									<% end %>
+								<p class="text-xs text-gray-600 mb-1">好み度</p>
+								<div class="flex items-center">
+										<% (1..5).each do |i| %>
+										<span class="text-lg <%= i <= tasting_note.preference_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
+										<% end %>
 								</div>
-
-								<!-- 評価スコア -->
-								<div class="grid grid-cols-2 gap-3 mb-3">
-									<% if tasting_note.preference_score.present? %>
-										<div>
-											<p class="text-xs text-gray-600 mb-1">好み度</p>
-											<div class="flex items-center">
-													<% (1..5).each do |i| %>
-													<span class="text-lg <%= i <= tasting_note.preference_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
-													<% end %>
-											</div>
-										</div>
-									<% end %>
-
-									<% if tasting_note.acidity_score.present? %>
-										<div>
-											<p class="text-xs text-gray-600 mb-1">酸味</p>
-											<div class="flex items-center">
-													<% (1..5).each do |i| %>
-													<span class="text-lg <%= i <= tasting_note.acidity_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
-													<% end %>
-											</div>
-										</div>
-									<% end %>
-
-									<% if tasting_note.bitterness_score.present? %>
-										<div>
-											<p class="text-xs text-gray-600 mb-1">苦味</p>
-											<div class="flex items-center">
-													<% (1..5).each do |i| %>
-													<span class="text-lg <%= i <= tasting_note.bitterness_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
-													<% end %>
-											</div>
-										</div>
-									<% end %>
-
-									<% if tasting_note.sweetness_score.present? %>
-										<div>
-											<p class="text-xs text-gray-600 mb-1">甘さ</p>
-											<div class="flex items-center">
-													<% (1..5).each do |i| %>
-													<span class="text-lg <%= i <= tasting_note.sweetness_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
-													<% end %>
-											</div>
-										</div>
-									<% end %>
-								</div>
-
-								<!-- 風味メモ -->
-									<% if tasting_note.taste_notes.present? %>
-									<p class="text-gray-600 text-sm mb-3">
-											<strong>風味:</strong> <%= truncate(tasting_note.taste_notes, length: 100) %>
-									</p>
-									<% end %>
-							</div>
-							<div class="flex justify-center items-center w-[40px] h-full text-gray-700 hover:text-gray-900">
-								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-								</svg>
 							</div>
 						<% end %>
+
+						<% if tasting_note.acidity_score.present? %>
+							<div>
+								<p class="text-xs text-gray-600 mb-1">酸味</p>
+								<div class="flex items-center">
+										<% (1..5).each do |i| %>
+										<span class="text-lg <%= i <= tasting_note.acidity_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
+										<% end %>
+								</div>
+							</div>
+						<% end %>
+
+						<% if tasting_note.bitterness_score.present? %>
+							<div>
+								<p class="text-xs text-gray-600 mb-1">苦味</p>
+								<div class="flex items-center">
+										<% (1..5).each do |i| %>
+										<span class="text-lg <%= i <= tasting_note.bitterness_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
+										<% end %>
+								</div>
+							</div>
+						<% end %>
+
+						<% if tasting_note.sweetness_score.present? %>
+							<div>
+								<p class="text-xs text-gray-600 mb-1">甘さ</p>
+								<div class="flex items-center">
+										<% (1..5).each do |i| %>
+										<span class="text-lg <%= i <= tasting_note.sweetness_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
+										<% end %>
+								</div>
+							</div>
+						<% end %>
+					</div>
+
+					<!-- 風味メモ -->
+						<% if tasting_note.taste_notes.present? %>
+						<p class="text-gray-600 text-sm mb-3">
+								<strong>風味:</strong> <%= truncate(tasting_note.taste_notes, length: 100) %>
+						</p>
+						<% end %>
+				</div>
+				<div class="flex justify-center items-center w-[40px] h-full text-gray-700 hover:text-gray-900">
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+					</svg>
+				</div>
+			<% end %>
           </div>
         <% end %>
       </div>
