@@ -27,7 +27,7 @@
                 <p class="text-gray-600 mb-2"><strong>メモ:</strong> <%= truncate(coffee_bean.notes, length: 100) %></p>
               <% end %>
             </div>
-            <%= link_to edit_coffee_bean_path(coffee_bean), class: "flex justify-center items-center w-[40px] h-full text-gray-700 hover:text-gray-900" do %>
+            <%= link_to coffee_bean_path(coffee_bean), class: "flex justify-center items-center w-[40px] h-full text-gray-700 hover:text-gray-900" do %>
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>

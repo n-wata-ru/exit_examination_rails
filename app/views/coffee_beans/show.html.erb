@@ -1,4 +1,110 @@
-<div>
-  <h1 class="font-bold text-4xl">CoffeeBeans#show</h1>
-  <p>Find me in app/views/coffee_beans/show.html.erb</p>
+<%= render 'shared/header_detail', title: 'コーヒー豆詳細', show_back_button: true %>
+<div class="min-h-screen bg-gray-50 p-4">
+  <div class="w-full max-w-4xl mx-auto">
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <!-- コーヒー豆情報 -->
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4"><%= @coffee_bean.name %></h1>
+        
+        <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <% if @coffee_bean.origin.present? %>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">産地</dt>
+              <dd class="mt-1 text-gray-900"><%= @coffee_bean.origin.country %></dd>
+            </div>
+          <% end %>
+
+          <% if @coffee_bean.variety.present? %>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">品種</dt>
+              <dd class="mt-1 text-gray-900"><%= @coffee_bean.variety %></dd>
+            </div>
+          <% end %>
+
+          <% if @coffee_bean.process.present? %>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">処理方法</dt>
+              <dd class="mt-1 text-gray-900"><%= @coffee_bean.process %></dd>
+            </div>
+          <% end %>
+
+          <% if @coffee_bean.roast_level.present? %>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">焙煎度</dt>
+              <dd class="mt-1 text-gray-900"><%= @coffee_bean.roast_level %></dd>
+            </div>
+          <% end %>
+        </dl>
+
+        <% if @coffee_bean.notes.present? %>
+          <div class="mt-4">
+            <dt class="text-sm font-medium text-gray-500 mb-1">メモ</dt>
+            <dd class="text-gray-900 whitespace-pre-wrap"><%= @coffee_bean.notes %></dd>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- アクションボタン -->
+      <div class="flex gap-3 border-t pt-6">
+        <%= link_to "評価を追加", new_coffee_bean_tasting_note_path(@coffee_bean),
+            class: "flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 text-center" %>
+        
+        <%= link_to "編集", edit_coffee_bean_path(@coffee_bean),
+            class: "bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200 text-center" %>
+        
+        <%= button_to "削除", coffee_bean_path(@coffee_bean), method: :delete, 
+            data: { confirm: "本当に削除しますか？" },
+            class: "bg-red-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-200" %>
+      </div>
+    </div>
+
+    <!-- このコーヒー豆の評価一覧 -->
+    <div class="mt-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">評価履歴</h2>
+      <% if @coffee_bean.tasting_notes.empty? %>
+        <p class="text-gray-600">まだ評価がありません。</p>
+      <% else %>
+        <div class="space-y-4">
+          <% @coffee_bean.tasting_notes.each do |tasting_note| %>
+            <div class="bg-white rounded-lg shadow-md p-4">
+              <% if tasting_note.brew_method.present? %>
+                <p class="text-sm text-gray-500 mb-2">抽出方法: <%= tasting_note.brew_method %></p>
+              <% end %>
+
+              <div class="grid grid-cols-2 gap-3 mb-3">
+                <% if tasting_note.preference_score.present? %>
+                  <div>
+                    <p class="text-xs text-gray-600 mb-1">好み度</p>
+                    <div class="flex items-center">
+                      <% (1..5).each do |i| %>
+                        <span class="text-lg <%= i <= tasting_note.preference_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+
+                <% if tasting_note.acidity_score.present? %>
+                  <div>
+                    <p class="text-xs text-gray-600 mb-1">酸味</p>
+                    <div class="flex items-center">
+                      <% (1..5).each do |i| %>
+                        <span class="text-lg <%= i <= tasting_note.acidity_score ? 'text-yellow-400' : 'text-gray-300' %>">★</span>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+
+              <% if tasting_note.taste_notes.present? %>
+                <p class="text-gray-600 text-sm mb-2"><%= truncate(tasting_note.taste_notes, length: 100) %></p>
+              <% end %>
+
+              <%= link_to "詳細", tasting_note_path(tasting_note), 
+                  class: "text-indigo-600 hover:text-indigo-800 text-sm font-medium" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
