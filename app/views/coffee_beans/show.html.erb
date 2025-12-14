@@ -4,6 +4,11 @@
     <div class="bg-white rounded-lg shadow-md p-6">
       <!-- コーヒー豆情報 -->
       <div class="mb-6">
+
+        <div class="mb-4">
+          <%= link_to '< 一覧へ戻る', coffee_beans_path, class: "text-indigo-600 hover:text-indigo-800 text-sm" %>
+        </div>
+
         <h1 class="text-3xl font-bold text-gray-800 mb-4"><%= @coffee_bean.name %></h1>
         
         <!-- 画像 -->
