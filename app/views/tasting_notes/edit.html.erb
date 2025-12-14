@@ -1,0 +1,15 @@
+<%= render 'shared/header_detail', title: '評価を編集', show_back_button: true %>
+<div class="min-h-screen bg-gray-50 flex items-center justify-center p-4 relative">
+  <div class="w-full max-w-md">
+    <div class="bg-white p-8">
+      <!-- コーヒー豆情報 -->
+      <div class="mb-6 p-4 bg-indigo-50 rounded-lg">
+        <p class="text-sm text-gray-600 mb-1">評価対象のコーヒー豆</p>
+        <h2 class="text-xl font-semibold text-gray-800"><%= @coffee_bean.name %></h2>
+      </div>
+
+      <!-- フォームパーシャル -->
+      <%= render "form", button_text: "更新する" %>
+    </div>
+  </div>
+</div>

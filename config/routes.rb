@@ -23,4 +23,11 @@ Rails.application.routes.draw do
 
   # コーヒー豆管理機能のルーティング
   resources :coffee_beans, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+
+  # テイスティングノート管理機能のルーティング
+  resources :tasting_notes, only: [ :index, :show ]
+  resources :coffee_beans do
+    # 新規作成時はどの豆の評価かが分かるようにネストさせる
+    resources :tasting_notes, except: [ :index, :show ]
+  end
 end

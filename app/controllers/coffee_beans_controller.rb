@@ -30,7 +30,7 @@ class CoffeeBeansController < ApplicationController
 
 def update
   if @coffee_bean.update(coffee_bean_params)
-    redirect_to coffee_beans_path, notice: "コーヒー豆を更新しました"
+    redirect_to coffee_bean_path(@coffee_bean), notice: "コーヒー豆を更新しました"
   else
     render :edit, status: :unprocessable_entity
   end
