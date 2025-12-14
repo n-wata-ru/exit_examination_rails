@@ -19,7 +19,7 @@ class TastingNotesController < ApplicationController
     @tasting_note.user = current_user
 
     if @tasting_note.save
-      redirect_to tasting_notes_path, notice: "テイスティングノートを登録しました"
+      redirect_to coffee_bean_path(@coffee_bean), notice: "テイスティングノートを登録しました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class TastingNotesController < ApplicationController
 
   def update
     if @tasting_note.update(tasting_note_params)
-      redirect_to tasting_notes_path, notice: "テイスティングノートを更新しました"
+      redirect_to tasting_note_path(@tasting_note), notice: "テイスティングノートを更新しました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,7 +38,8 @@ class TastingNotesController < ApplicationController
 
   def destroy
     @tasting_note.destroy
-    redirect_to tasting_notes_path, notice: "テイスティングノートを削除しました"
+    # コーヒーの詳細ページに戻る
+    redirect_to coffee_bean_path(@coffee_bean), notice: "テイスティングノートを削除しました"
   end
 
   private
