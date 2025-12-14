@@ -2,9 +2,9 @@ FROM ruby:3.3.5
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 
-# Install dependencies
+# Install dependencies including libvips for image processing
 RUN apt-get update -qq && \
-    apt-get install -y build-essential libpq-dev nodejs npm && \
+    apt-get install -y build-essential libpq-dev nodejs npm libvips42 libvips-dev && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /rails

@@ -58,7 +58,7 @@ end
       :variety,
       :process,
       :roast_level,
-      :images,
+      :image,
       :notes
     )
   end
