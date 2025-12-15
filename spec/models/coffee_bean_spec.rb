@@ -5,6 +5,7 @@ RSpec.describe CoffeeBean, type: :model do
     it { should belong_to(:user) }
     it { should belong_to(:origin).optional }
     it { should have_many(:tasting_notes).dependent(:destroy) }
+    it { should have_one_attached(:image) }
   end
 
   describe 'validations' do
