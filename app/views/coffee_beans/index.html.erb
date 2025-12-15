@@ -1,6 +1,6 @@
 <%= render 'shared/header_detail', title: '登録一覧', show_logout_button: true %>
-<div class="min-h-screen bg-gray-50 p-4 relative">
-  <div class="w-full max-w-6xl mx-auto">
+<div class="min-h-screen bg-[#efefef] p-4 relative">
+  <div class="w-full max-w-4xl mx-auto">
 
     <% if @coffee_beans.empty? %>
       <!-- データがない場合 -->
@@ -54,7 +54,7 @@
       <!-- 投稿ボタン -->
     <div class="fixed bottom-10 right-5 flex justify-end">
       <%= link_to new_coffee_bean_path, 
-          class: "w-16 h-16 bg-[#dddddd] hover:opacity-75 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-200 cursor-pointer flex items-center justify-center" do %>
+          class: "w-16 h-16 bg-[#be9d79] text-white hover:opacity-75 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-200 cursor-pointer flex items-center justify-center" do %>
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
         </svg>
