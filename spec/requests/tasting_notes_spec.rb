@@ -13,12 +13,12 @@ RSpec.describe "TastingNotes", type: :request do
   end
 
   describe "GET /index" do
-    it "returns http success" do
+    it "一覧ページを取得できること" do
       get tasting_notes_path
       expect(response).to have_http_status(:success)
     end
 
-    it "only shows current user's tasting notes" do
+    it "現在のユーザーのテイスティングノートのみ表示されること" do
       get tasting_notes_path
       expect(response.body).to include(coffee_bean.name)
       expect(response.body).not_to include(other_coffee_bean.name)
@@ -26,32 +26,32 @@ RSpec.describe "TastingNotes", type: :request do
   end
 
   describe "GET /show" do
-    it "returns http success for own tasting note" do
+    it "自身のテイスティングノートの詳細を取得できること" do
       get tasting_note_path(tasting_note)
       expect(response).to have_http_status(:success)
     end
 
-    it "returns 404 for other user's tasting note" do
+    it "他のユーザーのテイスティングノートの場合は404 Not Foundを返すこと" do
       get tasting_note_path(other_tasting_note)
       expect(response).to have_http_status(:not_found)
     end
   end
 
   describe "GET /new" do
-    it "returns http success for own coffee bean" do
+    it "コーヒー豆のテイスティングノート作成ページを取得できること" do
       get new_coffee_bean_tasting_note_path(coffee_bean)
       expect(response).to have_http_status(:success)
     end
 
-    it "returns 404 for other user's coffee bean" do
+    it "所有していないコーヒー豆を評価はできないため、404 Not Foundを返すこと" do
       get new_coffee_bean_tasting_note_path(other_coffee_bean)
       expect(response).to have_http_status(:not_found)
     end
   end
 
   describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a tasting note for current user's coffee bean" do
+    context "有効なパラメータの場合" do
+      it "現在のユーザーのコーヒー豆に対してテイスティングノートを作成できること" do
         expect {
           post coffee_bean_tasting_notes_path(coffee_bean), params: {
             tasting_note: {
@@ -67,7 +67,7 @@ RSpec.describe "TastingNotes", type: :request do
         expect(response).to redirect_to(coffee_bean_path(coffee_bean))
       end
 
-      it "associates tasting note with current user" do
+      it "作成したテイスティングノートが現在のユーザーと関連付けられること" do
         post coffee_bean_tasting_notes_path(coffee_bean), params: {
           tasting_note: { preference_score: 5 }
         }
@@ -75,8 +75,8 @@ RSpec.describe "TastingNotes", type: :request do
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a tasting note with invalid score" do
+    context "無効なパラメータの場合" do
+      it "無効なスコアでテイスティングノートを作成できないこと" do
         expect {
           post coffee_bean_tasting_notes_path(coffee_bean), params: {
             tasting_note: { preference_score: 10 }
@@ -87,8 +87,8 @@ RSpec.describe "TastingNotes", type: :request do
       end
     end
 
-    context "for other user's coffee bean" do
-      it "returns 404" do
+    context "所有していないコーヒー豆の場合" do
+      it "404 Not Foundを返すこと" do
         post coffee_bean_tasting_notes_path(other_coffee_bean), params: {
           tasting_note: { preference_score: 5 }
         }
@@ -98,25 +98,25 @@ RSpec.describe "TastingNotes", type: :request do
   end
 
   describe "GET /edit" do
-    it "returns http success for own tasting note" do
+    it "自身のテイスティングノートの編集ページを取得できること" do
       get edit_coffee_bean_tasting_note_path(coffee_bean, tasting_note)
       expect(response).to have_http_status(:success)
     end
 
-    it "returns 404 for other user's tasting note" do
+    it "他のユーザーのテイスティングノートの場合は404 Not Foundを返すこと" do
       get edit_coffee_bean_tasting_note_path(other_coffee_bean, other_tasting_note)
       expect(response).to have_http_status(:not_found)
     end
 
-    it "returns 404 when accessing own tasting note through other user's coffee bean path" do
+    it "自身のテイスティングノートを他のユーザーのコーヒー豆のパスからアクセスした場合は404 Not Foundを返すこと" do
       get edit_coffee_bean_tasting_note_path(other_coffee_bean, tasting_note)
       expect(response).to have_http_status(:not_found)
     end
   end
 
   describe "PATCH /update" do
-    context "with valid parameters" do
-      it "updates own tasting note" do
+    context "有効なパラメータの場合" do
+      it "自身のテイスティングノートを更新できること" do
         patch coffee_bean_tasting_note_path(coffee_bean, tasting_note), params: {
           tasting_note: { preference_score: 4 }
         }
@@ -125,8 +125,8 @@ RSpec.describe "TastingNotes", type: :request do
       end
     end
 
-    context "with invalid parameters" do
-      it "does not update tasting note" do
+    context "無効なパラメータの場合" do
+      it "テイスティングノートを更新できないこと" do
         original_score = tasting_note.preference_score
         patch coffee_bean_tasting_note_path(coffee_bean, tasting_note), params: {
           tasting_note: { preference_score: 10 }
@@ -136,8 +136,8 @@ RSpec.describe "TastingNotes", type: :request do
       end
     end
 
-    context "for other user's tasting note" do
-      it "returns 404" do
+    context "所有していないテイスティングノートの場合" do
+      it "404 Not Foundを返すこと" do
         patch coffee_bean_tasting_note_path(other_coffee_bean, other_tasting_note), params: {
           tasting_note: { preference_score: 1 }
         }
@@ -147,19 +147,19 @@ RSpec.describe "TastingNotes", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "deletes own tasting note" do
+    it "自身のテイスティングノートを削除できること" do
       expect {
         delete coffee_bean_tasting_note_path(coffee_bean, tasting_note)
       }.to change(TastingNote, :count).by(-1)
       expect(response).to redirect_to(coffee_bean_path(coffee_bean))
     end
 
-    it "returns 404 for other user's tasting note" do
+    it "他のユーザーのテイスティングノートの場合は404 Not Foundを返すこと" do
       delete coffee_bean_tasting_note_path(other_coffee_bean, other_tasting_note)
       expect(response).to have_http_status(:not_found)
     end
 
-    it "does not delete other user's tasting note" do
+    it "他のユーザーのテイスティングノートを削除できないこと" do
       expect {
         delete coffee_bean_tasting_note_path(other_coffee_bean, other_tasting_note)
       }.not_to change(TastingNote, :count)
@@ -172,7 +172,7 @@ RSpec.describe "TastingNotes", type: :request do
       delete destroy_user_session_path
     end
 
-    it "redirects to login when not authenticated" do
+    it "認証されていない場合はログインページにリダイレクトされること" do
       get tasting_notes_path
       expect(response).to redirect_to(new_user_session_path)
     end
