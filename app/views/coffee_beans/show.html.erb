@@ -1,12 +1,12 @@
 <%= render 'shared/header_detail', title: 'コーヒー豆詳細', show_back_button: true %>
-<div class="min-h-screen bg-gray-50 p-4">
+<div class="min-h-screen bg-[#efefef] p-4">
   <div class="w-full max-w-4xl mx-auto">
     <div class="bg-white rounded-lg shadow-md p-6">
       <!-- コーヒー豆情報 -->
       <div class="mb-6">
 
         <div class="mb-4">
-          <%= link_to '< 一覧へ戻る', coffee_beans_path, class: "text-indigo-600 hover:text-indigo-800 text-sm" %>
+          <%= link_to '< 一覧へ戻る', coffee_beans_path, class: "text-[#be9d79] hover:text-[#a07c5a] text-sm" %>
         </div>
 
         <h1 class="text-3xl font-bold text-gray-800 mb-4"><%= @coffee_bean.name %></h1>
@@ -59,7 +59,7 @@
       <!-- アクションボタン -->
       <div class="flex gap-3 border-t border-gray-200 pt-6 items-center justify-between">
         <%= link_to "評価を追加", new_coffee_bean_tasting_note_path(@coffee_bean),
-            class: "flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 text-center" %>
+            class: "flex-1 bg-[#be9d79] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#a07c5a] focus:outline-none focus:ring-2 focus:ring-[#a07c5a] focus:ring-offset-2 transition duration-200 text-center" %>
         
         <%= link_to "編集", edit_coffee_bean_path(@coffee_bean),
             class: "bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200 text-center" %>
