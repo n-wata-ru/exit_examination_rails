@@ -1,0 +1,65 @@
+ja:
+  activerecord:
+    models:
+      coffee_bean: コーヒー豆
+      tasting_note: テイスティングノート
+      user: ユーザー
+      origin: 産地
+      shop: 店舗
+    attributes:
+      coffee_bean:
+        name: コーヒー名
+        user: ユーザー
+        origin: 産地
+        origin_id: 産地
+        variety: 品種
+        process: 処理方法
+        roast_level: 焙煎度
+        image: 画像
+        notes: メモ
+        created_at: 作成日時
+        updated_at: 更新日時
+      tasting_note:
+        user: ユーザー
+        coffee_bean: コーヒー豆
+        coffee_bean_id: コーヒー豆
+        shop: 店舗
+        shop_id: 店舗
+        brew_method: 抽出方法
+        preference_score: 好みスコア
+        acidity_score: 酸味スコア
+        bitterness_score: 苦味スコア
+        sweetness_score: 甘みスコア
+        taste_notes: テイスティングメモ
+        created_at: 作成日時
+        updated_at: 更新日時
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+        current_password: 現在のパスワード
+        remember_me: ログイン状態を保持する
+        created_at: 作成日時
+        updated_at: 更新日時
+  errors:
+    messages:
+      not_saved:
+        one: "1件のエラーがあります"
+        other: "%{count}件のエラーがあります"
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "既にログアウト済みです。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報を変更しました。"
+      destroyed: "アカウントを削除しました。"
+    failure:
+      already_authenticated: "すでにログインしています。"
+      invalid: "メールアドレスまたはパスワードが違います。"
+      not_found_in_database: "メールアドレスまたはパスワードが違います。"
+      timeout: "セッションがタイムアウトしました。もう一度ログインしてください。"
+      unauthenticated: "ログインしてください。"
+      unconfirmed: "メールアドレスの本人確認が必要です。"
