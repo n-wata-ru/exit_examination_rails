@@ -5,8 +5,8 @@ RSpec.describe "TastingNotes", type: :request do
   let!(:other_user) { FactoryBot.create(:user) }
   let!(:coffee_bean) { FactoryBot.create(:coffee_bean, user: user) }
   let!(:other_coffee_bean) { FactoryBot.create(:coffee_bean, user: other_user, name: 'Other Bean') }
-  let!(:tasting_note) { TastingNote.create!(user: user, coffee_bean: coffee_bean, preference_score: 5) }
-  let!(:other_tasting_note) { TastingNote.create!(user: other_user, coffee_bean: other_coffee_bean, preference_score: 3) }
+  let!(:tasting_note) { TastingNote.create!(user: user, coffee_bean: coffee_bean, preference_score: 5, acidity_score: 3, bitterness_score: 3, sweetness_score: 4, brew_method: 'ハンドドリップ') }
+  let!(:other_tasting_note) { TastingNote.create!(user: other_user, coffee_bean: other_coffee_bean, preference_score: 3, acidity_score: 2, bitterness_score: 4, sweetness_score: 3, brew_method: 'エスプレッソ') }
 
   before do
     post user_session_path, params: { user: { email: user.email, password: 'password123' } }
@@ -69,17 +69,23 @@ RSpec.describe "TastingNotes", type: :request do
 
       it "作成したテイスティングノートが現在のユーザーと関連付けられること" do
         post coffee_bean_tasting_notes_path(coffee_bean), params: {
-          tasting_note: { preference_score: 5 }
+          tasting_note: {
+            preference_score: 5,
+            acidity_score: 3,
+            bitterness_score: 3,
+            sweetness_score: 4,
+            brew_method: 'ハンドドリップ'
+          }
         }
         expect(TastingNote.last.user).to eq(user)
       end
     end
 
     context "無効なパラメータの場合" do
-      it "無効なスコアでテイスティングノートを作成できないこと" do
+      it "必須フィールドが欠けている場合、テイスティングノートを作成できないこと" do
         expect {
           post coffee_bean_tasting_notes_path(coffee_bean), params: {
-            tasting_note: { preference_score: 10 }
+            tasting_note: { preference_score: 5 }
           }
         }.not_to change(TastingNote, :count)
 
@@ -126,10 +132,10 @@ RSpec.describe "TastingNotes", type: :request do
     end
 
     context "無効なパラメータの場合" do
-      it "テイスティングノートを更新できないこと" do
+      it "必須フィールドを空にすると更新できないこと" do
         original_score = tasting_note.preference_score
         patch coffee_bean_tasting_note_path(coffee_bean, tasting_note), params: {
-          tasting_note: { preference_score: 10 }
+          tasting_note: { preference_score: nil }
         }
         expect(tasting_note.reload.preference_score).to eq(original_score)
         expect(response).to have_http_status(:unprocessable_entity)
