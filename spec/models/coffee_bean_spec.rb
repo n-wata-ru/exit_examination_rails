@@ -42,8 +42,8 @@ RSpec.describe CoffeeBean, type: :model do
     let(:user) { FactoryBot.create(:user) }
     let(:coffee_bean) { FactoryBot.create(:coffee_bean, user: user) }
 
-    it 'destroys associated tasting_notes when coffee_bean is destroyed' do
-      tasting_note = coffee_bean.tasting_notes.create!(
+    it 'coffee_beanが削除されたら関連するtasting_notesも削除されること' do
+      coffee_bean.tasting_notes.create!(
         user: user,
         preference_score: 5
       )
