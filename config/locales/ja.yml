@@ -1,0 +1,35 @@
+ja:
+  activerecord:
+    models:
+      coffee_bean: コーヒー豆
+      tasting_note: テイスティングノート
+      user: ユーザー
+      origin: 産地
+      shop: 店舗
+    attributes:
+      coffee_bean:
+        name: コーヒー名
+        user: ユーザー
+        origin: 産地
+        origin_id: 産地
+        variety: 品種
+        process: 処理方法
+        roast_level: 焙煎度
+        image: 画像
+        notes: メモ
+        created_at: 作成日時
+        updated_at: 更新日時
+      tasting_note:
+        user: ユーザー
+        coffee_bean: コーヒー豆
+        coffee_bean_id: コーヒー豆
+        shop: 店舗
+        shop_id: 店舗
+        brew_method: 抽出方法
+        preference_score: 好みスコア
+        acidity_score: 酸味スコア
+        bitterness_score: 苦味スコア
+        sweetness_score: 甘みスコア
+        taste_notes: テイスティングメモ
+        created_at: 作成日時
+        updated_at: 更新日時

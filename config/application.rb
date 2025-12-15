@@ -38,5 +38,8 @@ module ExitExaminationRails
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Set default locale to Japanese
+    config.i18n.default_locale = :ja
   end
 end
