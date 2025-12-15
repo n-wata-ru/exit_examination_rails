@@ -8,3 +8,12 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* 星評価のカスタムCSS */
+.star-rating input[type="radio"]:checked ~ label {
+  color: #FBBF24; /* 黄色 */
+}
+
+.star-rating input[type="radio"]:checked + label {
+  color: #FBBF24; /* チェックされた星自身 */
+}

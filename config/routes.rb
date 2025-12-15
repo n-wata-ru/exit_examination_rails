@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   # ログイン済みユーザーのルート
   authenticated :user do
-    root to: "home#index", as: :authenticated_root
+    root to: "coffee_beans#index", as: :authenticated_root
   end
 
   # ログインしていないユーザーのルート
@@ -19,5 +19,15 @@ Rails.application.routes.draw do
     devise_scope :user do
       root to: "devise/sessions#new"
     end
+  end
+
+  # コーヒー豆管理機能のルーティング
+  resources :coffee_beans, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+
+  # テイスティングノート管理機能のルーティング
+  resources :tasting_notes, only: [ :index, :show ]
+  resources :coffee_beans do
+    # 新規作成時はどの豆の評価かが分かるようにネストさせる
+    resources :tasting_notes, except: [ :index, :show ]
   end
 end
