@@ -1,0 +1,61 @@
+<%= render 'shared/header_detail', title: 'AIチャット', show_back_button: false %>
+<div class="min-h-screen bg-[#efefef] p-4">
+  <div class="w-full max-w-4xl mx-auto">
+		<div class="flex h-screen">
+			<!-- 左側: スレッド一覧 -->
+			<div class="w-1/4 bg-gray-100 border-r border-gray-300 overflow-y-auto">
+				<div class="p-4">
+					<h2 class="text-xl font-bold mb-4">チャット履歴</h2>
+					
+					<% if @chat_threads.any? %>
+						<ul class="space-y-2">
+							<% @chat_threads.each do |thread| %>
+								<li>
+									<%= link_to thread.title, chat_thread_path(thread), 
+											class: "block p-3 rounded #{@current_thread&.id == thread.id ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}" %>
+								</li>
+							<% end %>
+						</ul>
+					<% else %>
+						<p class="text-gray-500 text-center mt-8">まだスレッドがありません</p>
+					<% end %>
+				</div>
+			</div>
+
+			<!-- 右側: メッセージエリア -->
+			<div class="flex-1 flex flex-col">
+				<!-- メッセージ表示エリア -->
+				<div class="flex-1 overflow-y-auto p-4 bg-gray-50">
+					<% if @messages.any? %>
+						<% @messages.each do |message| %>
+							<div class="mb-4 <%= message.role == 'user' ? 'text-right' : 'text-left' %>">
+								<div class="inline-block max-w-md p-3 rounded-lg <%= message.role == 'user' ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300' %>">
+									<p class="text-sm"><%= message.content %></p>
+									<span class="text-xs opacity-75"><%= message.created_at.strftime('%H:%M') %></span>
+								</div>
+							</div>
+						<% end %>
+					<% else %>
+						<p class="text-gray-500 text-center mt-8">メッセージがありません。下から送信してください。</p>
+					<% end %>
+				</div>
+
+				<!-- メッセージ入力フォーム -->
+				<div class="bg-white border-t border-gray-300 p-4">
+					<% if @is_new_thread %>
+						<%= form_with url: chat_messages_path, method: :post, local: true, class: "flex gap-2" do |f| %>
+							<%= text_field_tag :content, "", placeholder: "メッセージを入力...", class: "flex-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500", required: true %>
+							<%= f.submit "送信", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 cursor-pointer" %>
+						<% end %>
+					<% else %>
+						<%= form_with url: chat_messages_path, method: :post, local: true, class: "flex gap-2" do |f| %>
+							<%= hidden_field_tag :chat_thread_id, @current_thread.id %>
+							<%= text_field_tag :content, "", placeholder: "メッセージを入力...", class: "flex-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500", required: true %>
+							<%= f.submit "送信", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 cursor-pointer" %>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
