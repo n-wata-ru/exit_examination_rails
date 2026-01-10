@@ -68,11 +68,11 @@
 | フレームワーク | Ruby on Rails（最新安定版 7.x）     |
 | 言語           | Ruby / ERB         |
 | DB             | PostgreSQL                           |
-| 認証           | Devise（予定）                      |
+| 認証           | Devise                         |
 | デプロイ       | Heroku                               |
 | 地図表示       | Google Maps API |
-| UIフレームワーク | Tailwind CSS（予定）                |
-| AI連携         | OpenAI API（ChatGPT予定）               |
+| UIフレームワーク | Tailwind CSS                  |
+| AI連携         | OpenAI API（ChatGPT）               |
 
 ---
 
@@ -94,7 +94,7 @@
 er.puml を次のサービスでER図を表示
 https://kroki.io/
 
-[![Image from Gyazo](https://i.gyazo.com/f88d65964732b3278d65f73f9a581250.png)](https://gyazo.com/f88d65964732b3278d65f73f9a581250)
+[![Image from Gyazo](https://i.gyazo.com/4cc397e4838933e79821414da945c319.png)](https://gyazo.com/4cc397e4838933e79821414da945c319)
 
 ## Project
 
