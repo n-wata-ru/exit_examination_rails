@@ -9,11 +9,11 @@ class ChatMessagesController < ApplicationController
       @chat_thread = current_user.chat_threads.find(params[:chat_thread_id])
     else
       # なければ仮のtitleで新規スレッド作成
-      title = content.truncate(30, omission: '...')
+      title = content.truncate(30, omission: "...")
       @chat_thread = current_user.chat_threads.create!(title: title)
     end
-    
-    # ユーザーのメッセージを作成    
+
+    # ユーザーのメッセージを作成
     @chat_thread.chat_messages.create!(
       user: current_user,
       role: "user",
@@ -34,7 +34,7 @@ class ChatMessagesController < ApplicationController
         content: ai_content
       )
     end
-    
-    redirect_to chat_thread_path(@chat_thread), notice: 'メッセージを送信しました。'
+
+    redirect_to chat_thread_path(@chat_thread), notice: "メッセージを送信しました。"
   end
 end
