@@ -64,9 +64,30 @@ entity Origins {
   updated_at : datetime
 }
 
+entity ChatThreads {
+  *id : bigint
+  *user_id : bigint
+  title : string
+  created_at : datetime
+  updated_at : datetime
+}
+
+entity ChatMessages {
+  *id : bigint
+  *chat_thread_id : bigint
+  *user_id : bigint
+  *role : string
+  *content : text
+  created_at : datetime
+  updated_at : datetime
+}
+
 Users ||--o{ CoffeeBeans
 Users ||--o{ TastingNotes
 CoffeeBeans ||--o{ TastingNotes
 Shops ||--o{ TastingNotes
 Origins ||--o{ CoffeeBeans
+Users ||--o{ ChatThreads
+ChatThreads ||--o{ ChatMessages
+Users ||--o{ ChatMessages
 @enduml
