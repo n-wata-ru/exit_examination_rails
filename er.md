@@ -82,3 +82,29 @@
 | notes        | text            | 備考（標高、生産者、ロット情報など）     |
 | created_at   | datetime        | 作成日時                            |
 | updated_at   | datetime        | 更新日時                            |
+
+---
+
+## chat_threads
+
+| カラム名       | 型              | 説明                              |
+| ------------ | --------------- | --------------------------------- |
+| id           | bigint          | 主キー                             |
+| user_id      | bigint          | `users`への外部キー (NOT NULL)      |
+| title        | string          | スレッド名                          |
+| created_at   | datetime        | 作成日時                            |
+| updated_at   | datetime        | 更新日時                            |
+
+---
+
+## chat_messages
+
+| カラム名         | 型        | 説明                                      |
+| --------------- | --------- | ---------------------------------------- |
+| id              | bigint    | 主キー                                    |
+| chat_thread_id  | bigint    | `chat_threads`への外部キー (NOT NULL)      |
+| user_id         | bigint    | `users`への外部キー (NOT NULL)            |
+| role            | string    | メッセージの送信者 ("user" or "assistant") |
+| content         | text      | メッセージ内容                              |
+| created_at      | datetime  | 作成日時                                   |
+| updated_at      | datetime  | 更新日時                                   |
