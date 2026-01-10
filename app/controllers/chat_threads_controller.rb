@@ -13,10 +13,4 @@ class ChatThreadsController < ApplicationController
     @current_thread = @chat_threads.find(params[:id])
     @messages = @current_thread.chat_messages.order(created_at: :asc)
   end
-
-  def destroy
-    @chat_thread = current_user.chat_threads.find(params[:id])
-    @chat_thread.destroy
-    redirect_to chat_threads_path, notice: 'スレッドを削除しました。'
-  end
 end
