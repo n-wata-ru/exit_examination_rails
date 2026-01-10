@@ -1,0 +1,38 @@
+<div class="flex flex-col h-screen bg-white">
+
+  <!-- チャットログ領域 -->
+  <div id="chat-log"
+       class="flex-1 overflow-y-auto px-4 py-6 space-y-4">
+
+    <% @messages.each do |msg| %>
+      <% if msg.user? %>
+        <!-- ユーザー（右寄せ） -->
+        <div class="flex justify-end">
+          <div class="max-w-[80%] bg-indigo-500 text-white p-3 rounded-xl rounded-br-sm shadow">
+            <%= msg.content %>
+          </div>
+        </div>
+      <% else %>
+        <!-- AI（左寄せ） -->
+        <div class="flex justify-start">
+          <div class="max-w-[80%] bg-white text-gray-800 p-3 rounded-xl rounded-bl-sm border shadow-sm">
+            <%= msg.content %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <!-- 入力フォーム（画面下固定） -->
+  <div class="bg-white p-3">
+    <%= form_with url: ai_chat_path, method: :post, local: true, class: "flex gap-2" do |f| %>
+      <%= f.text_field :message,
+        placeholder: "メッセージを入力...",
+        class: "flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+      <%= f.submit "送信",
+        class: "bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600" %>
+    <% end %>
+  </div>
+
+</div>
