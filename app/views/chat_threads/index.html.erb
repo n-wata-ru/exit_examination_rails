@@ -1,9 +1,9 @@
 <%= render 'shared/header_detail', title: 'AIチャット', show_back_button: false %>
-<div class="min-h-screen bg-[#efefef] p-4">
-  <div class="w-full max-w-4xl mx-auto">
+<div class="min-h-screen bg-[#efefef]">
+  <div class="w-full max-w-4xl sm:max-w-full mx-auto">
 		<div class="flex h-screen">
 			<!-- 左側: スレッド一覧 -->
-			<div class="w-1/4 bg-gray-100 border-r border-gray-300 overflow-y-auto">
+			<div class="w-1/4 bg-gray-100 border-r border-gray-300 overflow-y-auto hidden sm:block">
 				<div class="p-4">
 					<h2 class="text-xl font-bold mb-4">チャット履歴</h2>
 					
@@ -12,7 +12,7 @@
 							<% @chat_threads.each do |thread| %>
 								<li>
 									<%= link_to thread.title, chat_thread_path(thread), 
-											class: "block p-3 rounded #{@current_thread&.id == thread.id ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}" %>
+											class: "block p-3 rounded #{@current_thread&.id == thread.id ? 'bg-gray-200' : 'bg-white hover:bg-gray-200'}" %>
 								</li>
 							<% end %>
 						</ul>
@@ -23,14 +23,14 @@
 			</div>
 
 			<!-- 右側: メッセージエリア -->
-			<div class="flex-1 flex flex-col">
+			<div class="flex-1 flex flex-col bg-white">
 				<!-- メッセージ表示エリア -->
-				<div class="flex-1 overflow-y-auto p-4 bg-gray-50">
+				<div class="flex-1 overflow-y-auto p-4 w-full max-w-3xl mx-auto">
 					<% if @messages.any? %>
 						<% @messages.each do |message| %>
 							<div class="mb-4 <%= message.role == 'user' ? 'text-right' : 'text-left' %>">
-								<div class="inline-block max-w-md p-3 rounded-lg <%= message.role == 'user' ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300' %>">
-									<p class="text-sm"><%= message.content %></p>
+								<div class="inline-block max-w-md p-3 rounded-lg <%= message.role == 'user' ? 'bg-[rgba(37,37,37,0.04)]' : 'bg-white border border-gray-300' %>">
+									<p class="text-sm wrap-break-word text-left"><%= message.content %></p>
 									<span class="text-xs opacity-75"><%= message.created_at.strftime('%H:%M') %></span>
 								</div>
 							</div>
@@ -41,17 +41,17 @@
 				</div>
 
 				<!-- メッセージ入力フォーム -->
-				<div class="bg-white border-t border-gray-300 p-4">
+				<div class="bg-white px-4 pt-4 pb-8 sticky bottom-0 w-full max-w-3xl mx-auto">
 					<% if @is_new_thread %>
 						<%= form_with url: chat_messages_path, method: :post, local: true, class: "flex gap-2" do |f| %>
-							<%= text_field_tag :content, "", placeholder: "メッセージを入力...", class: "flex-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500", required: true %>
-							<%= f.submit "送信", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 cursor-pointer" %>
+							<%= text_field_tag :content, "", placeholder: "メッセージを入力...", class: "flex-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200", required: true %>
+							<%= f.submit "送信", class: "bg-[#be9d79] hover:bg-[#a07c5a] text-white py-3 px-4 font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a07c5a] focus:ring-offset-2 transition duration-200 cursor-pointer" %>
 						<% end %>
 					<% else %>
 						<%= form_with url: chat_messages_path, method: :post, local: true, class: "flex gap-2" do |f| %>
 							<%= hidden_field_tag :chat_thread_id, @current_thread.id %>
-							<%= text_field_tag :content, "", placeholder: "メッセージを入力...", class: "flex-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500", required: true %>
-							<%= f.submit "送信", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 cursor-pointer" %>
+							<%= text_field_tag :content, "", placeholder: "メッセージを入力...", class: "flex-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200", required: true %>
+							<%= f.submit "送信", class: "bg-[#be9d79] hover:bg-[#a07c5a] text-white py-3 px-4 font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a07c5a] focus:ring-offset-2 transition duration-200 cursor-pointer" %>
 						<% end %>
 					<% end %>
 				</div>
