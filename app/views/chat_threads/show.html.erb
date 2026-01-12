@@ -50,7 +50,8 @@
 
     <!-- メッセージ入力フォーム -->
     <div class="bg-white border-t border-gray-300 p-4">
-      <%= form_with url: chat_thread_chat_messages_path(@current_thread), method: :post, local: true, class: "flex gap-2" do |f| %>
+      <%= form_with url: chat_messages_path, method: :post, local: true, class: "flex gap-2" do |f| %>
+        <%= hidden_field_tag :chat_thread_id, @current_thread.id %>
         <%= text_field_tag :content, "", placeholder: "メッセージを入力...", class: "flex-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500", required: true %>
         <%= f.submit "送信", class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 cursor-pointer" %>
       <% end %>

@@ -12,5 +12,6 @@ class ChatThreadsController < ApplicationController
     @chat_threads = current_user.chat_threads.order(updated_at: :desc)
     @current_thread = @chat_threads.find(params[:id])
     @messages = @current_thread.chat_messages.order(created_at: :asc)
+    @is_new_thread = @current_thread.nil?
   end
 end
