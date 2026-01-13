@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'associations' do
     it { should have_many(:tasting_notes).dependent(:destroy) }
+    it { should have_many(:coffee_beans).dependent(:destroy) }
+    it { should have_many(:chat_threads).dependent(:destroy) }
+    it { should have_many(:chat_messages).dependent(:destroy) }
   end
 
   describe 'Devise モジュール' do

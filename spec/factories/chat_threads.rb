@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :chat_thread do
-    user { nil }
+    association :user
     title { "MyString" }
   end
 end
