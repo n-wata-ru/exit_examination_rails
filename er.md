@@ -91,7 +91,7 @@
 | ------------ | --------------- | --------------------------------- |
 | id           | bigint          | 主キー                             |
 | user_id      | bigint          | `users`への外部キー (NOT NULL)      |
-| title        | string          | スレッド名                          |
+| title        | string          | スレッド (NOT NULL) 名                          |
 | created_at   | datetime        | 作成日時                            |
 | updated_at   | datetime        | 更新日時                            |
 
@@ -103,8 +103,8 @@
 | --------------- | --------- | ---------------------------------------- |
 | id              | bigint    | 主キー                                    |
 | chat_thread_id  | bigint    | `chat_threads`への外部キー (NOT NULL)      |
-| user_id         | bigint    | `users`への外部キー (NOT NULL)            |
-| role            | string    | メッセージの送信者 ("user" or "assistant") |
-| content         | text      | メッセージ内容                              |
+| user_id         | bigint    | `users`への外部キー             |
+| role            | string    | メッセージの送信者 ("user" or "assistant" NOT NULL) |
+| content         | text      | メッセージ内 (NOT NULL)容                              |
 | created_at      | datetime  | 作成日時                                   |
 | updated_at      | datetime  | 更新日時                                   |

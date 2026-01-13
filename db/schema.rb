@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_10_071334) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_13_085440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,9 +44,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_10_071334) do
 
   create_table "chat_messages", force: :cascade do |t|
     t.bigint "chat_thread_id", null: false
-    t.text "content"
+    t.text "content", null: false
     t.datetime "created_at", null: false
-    t.string "role"
+    t.string "role", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["chat_thread_id"], name: "index_chat_messages_on_chat_thread_id"
@@ -55,7 +55,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_10_071334) do
 
   create_table "chat_threads", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.string "title"
+    t.string "title", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_chat_threads_on_user_id"
