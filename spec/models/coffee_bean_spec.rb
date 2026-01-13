@@ -46,7 +46,12 @@ RSpec.describe CoffeeBean, type: :model do
     it 'coffee_beanが削除されたら関連するtasting_notesも削除されること' do
       coffee_bean.tasting_notes.create!(
         user: user,
-        preference_score: 5
+        preference_score: 5,
+        acidity_score: 4,
+        bitterness_score: 3,
+        sweetness_score: 4,
+        brew_method: 'Pour Over',
+        taste_notes: ''
       )
 
       expect { coffee_bean.destroy }.to change { TastingNote.count }.by(-1)
