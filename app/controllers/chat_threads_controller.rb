@@ -25,7 +25,7 @@ class ChatThreadsController < ApplicationController
     response.headers["X-Accel-Buffering"] = "no"
 
     # SSEストリーム
-    sse = SSE.new(response.stream, retry: 300, event: "message")
+    sse = Sse.new(response.stream, retry: 300, event: "message")
 
     begin
       # メッセージ履歴を取得
