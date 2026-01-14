@@ -8,7 +8,7 @@ module OpenAi
 
     def generate_chat_response(messages:)
       full_text = +""
-      
+
       begin
         # gem 8.3.0の正しい形式
         @client.chat(
@@ -22,7 +22,7 @@ module OpenAi
             end
           }
         )
-        
+
         full_text.strip
       rescue => e
         Rails.logger.error("OpenAI API Error: #{e.message}")
