@@ -35,6 +35,11 @@
           %>
         </li>
         <li>
+          <%= link_to "AIチャット", chat_threads_path,
+            class: "block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left"
+          %>
+        </li>
+        <li>
           <%= button_to "ログアウト", destroy_user_session_path,
             method: :delete,
             class: "block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left"

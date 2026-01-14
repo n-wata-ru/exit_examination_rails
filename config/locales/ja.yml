@@ -63,3 +63,8 @@ ja:
       timeout: "セッションがタイムアウトしました。もう一度ログインしてください。"
       unauthenticated: "ログインしてください。"
       unconfirmed: "メールアドレスの本人確認が必要です。"
+    time:
+      formats:
+        default: "%Y/%m/%d %H:%M"
+        short: "%m/%d %H:%M"
+        long: "%Y年%m月%d日 %H時%M分"

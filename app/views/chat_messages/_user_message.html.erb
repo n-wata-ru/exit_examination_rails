@@ -1,0 +1,6 @@
+<div class="mb-4 text-right">
+  <div class="inline-block max-w-md p-3 rounded-lg bg-blue-500 text-white">
+    <p class="text-sm"><%= message.content %></p>
+    <span class="text-xs opacity-75"><%= message.created_at.in_time_zone('Asia/Tokyo').to_fs(:short) %></span>
+  </div>
+</div>
