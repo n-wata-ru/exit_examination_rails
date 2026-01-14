@@ -30,4 +30,12 @@ Rails.application.routes.draw do
     # 新規作成時はどの豆の評価かが分かるようにネストさせる
     resources :tasting_notes, except: [ :index, :show ]
   end
+
+  # AI分析機能のルーティング
+  resources :chat_threads, only: [ :index, :show, :destroy ] do
+    member do
+      get :stream
+    end
+  end
+  resources :chat_messages, only: [ :create ], controller: "chat_messages"
 end
