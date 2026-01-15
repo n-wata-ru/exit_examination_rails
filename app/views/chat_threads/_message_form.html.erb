@@ -6,7 +6,7 @@
                   class: "flex gap-2" do |f| %>
       <%= text_area_tag :content, "", placeholder: "メッセージを入力...", 
                         data: { chat_form_target: "input" },
-                        class: "flex-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200", required: true, rows: 1 %>
+                        class: "flex-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 min-h-[50px]", required: true, rows: 1 %>
       <%= f.submit "送信", data: { chat_form_target: "submit" }, class: "self-end bg-[#be9d79] hover:bg-[#a07c5a] text-white py-3 px-4 font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a07c5a] focus:ring-offset-2 transition duration-200 cursor-pointer" %>
     <% end %>
   <% else %>
@@ -20,7 +20,7 @@
       <%= hidden_field_tag :chat_thread_id, current_thread.id %>
       <%= text_area_tag :content, "", placeholder: "メッセージを入力...", 
                         data: { chat_form_target: "input" },
-                        class: "flex-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200", required: true, rows: 1 %>
+                        class: "flex-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 min-h-[50px]", required: true, rows: 1 %>
       <%= f.submit "送信", data: { chat_form_target: "submit" }, class: "self-end bg-[#be9d79] hover:bg-[#a07c5a] text-white py-3 px-4 font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a07c5a] focus:ring-offset-2 transition duration-200 cursor-pointer" %>
     <% end %>
   <% end %>
