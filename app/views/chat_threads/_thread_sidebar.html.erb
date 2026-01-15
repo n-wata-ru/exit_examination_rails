@@ -6,7 +6,7 @@
     <% if chat_threads.any? %>
       <ul class="space-y-2">
         <% chat_threads.each do |thread| %>
-          <li class="flex relative p-3 <%= current_thread&.id == thread.id ? 'bg-gray-200' : 'bg-white hover:bg-gray-200' %>">
+          <li class="rounded-lg flex relative p-3 <%= current_thread&.id == thread.id ? 'bg-gray-200' : 'bg-white hover:bg-gray-200' %>">
             <%= link_to thread.title, chat_thread_path(thread), 
                 class: "flex flex-1 rounded #{current_thread&.id == thread.id ? 'bg-gray-200' : 'bg-white hover:bg-gray-200'}" %>
             <%# スレッド削除機能 %>
