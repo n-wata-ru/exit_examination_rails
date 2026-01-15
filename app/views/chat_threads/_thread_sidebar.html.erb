@@ -1,0 +1,19 @@
+<!-- 左側: スレッド一覧 -->
+<div class="w-1/4 bg-gray-100 border-r border-gray-300 overflow-y-auto hidden sm:block">
+  <div class="p-4">
+    <h2 class="text-xl font-bold mb-4">チャット履歴</h2>
+    
+    <% if chat_threads.any? %>
+      <ul class="space-y-2">
+        <% chat_threads.each do |thread| %>
+          <li>
+            <%= link_to thread.title, chat_thread_path(thread), 
+                class: "block p-3 rounded #{current_thread&.id == thread.id ? 'bg-gray-200' : 'bg-white hover:bg-gray-200'}" %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500 text-center mt-8">まだスレッドがありません</p>
+    <% end %>
+  </div>
+</div>
