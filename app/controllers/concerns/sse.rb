@@ -1,4 +1,4 @@
-class SSE
+class Sse
   def initialize(io, options = {})
     @io = io
     @options = options
