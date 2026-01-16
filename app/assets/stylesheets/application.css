@@ -9,6 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+html {
+  color: rgba(37, 37, 37, 1);
+}
+
 /* 星評価のカスタムCSS */
 .star-rating input[type="radio"]:checked ~ label {
   color: #FBBF24; /* 黄色 */
