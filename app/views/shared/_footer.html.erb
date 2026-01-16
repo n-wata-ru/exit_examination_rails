@@ -1,8 +1,12 @@
 <footer class="border-t border-gray-300 bg-white py-4">
   <ul class="flex justify-center gap-6">
-    <li class="text-sm">利用規約</li>
-    <li class="text-sm">プライバシーポリシー</li>
+    <li class="text-sm hover:underline">
+      <%= link_to "利用規約", policies_terms_of_service_path %>
+    </li>
+    <li class="text-sm hover:underline">
+	    <%= link_to "プライバシーポリシー", policies_privacy_policy_path %>
+    </li>
     <%# <li class=" text-sm">お問い合わせ</li> %>
   </ul>
-  <address class="text-center text-[rgba(37, 37, 37, 0.8)] text-sm mt-1">© 2026 MyCoffeeNote</address>
+  <address class="text-center text-[rgba(37, 37, 37, 0.8)] text-sm mt-2">© 2026 MyCoffeeNote</address>
 </footer>
