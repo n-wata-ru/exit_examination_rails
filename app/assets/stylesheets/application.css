@@ -11,6 +11,7 @@
 
 html {
   color: rgba(37, 37, 37, 1);
+  font-family: "system_ui", -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /* 星評価のカスタムCSS */
