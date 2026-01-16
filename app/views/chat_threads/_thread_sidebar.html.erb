@@ -6,9 +6,24 @@
     <% if chat_threads.any? %>
       <ul class="space-y-2">
         <% chat_threads.each do |thread| %>
-          <li>
+          <li class="rounded-lg flex relative p-3 <%= current_thread&.id == thread.id ? 'bg-gray-200' : 'bg-white hover:bg-gray-200' %>">
             <%= link_to thread.title, chat_thread_path(thread), 
-                class: "block p-3 rounded #{current_thread&.id == thread.id ? 'bg-gray-200' : 'bg-white hover:bg-gray-200'}" %>
+                class: "flex flex-1 rounded #{current_thread&.id == thread.id ? 'bg-gray-200' : 'bg-white hover:bg-gray-200'}" %>
+            <%# スレッド削除機能 %>
+						<%# <div class="flex justify-end" data-controller="dropdown">
+							<button type="button" data-action="click->dropdown#toggle" class="flex items-center text-gray-700 hover:text-gray-900 cursor-pointer">
+									･･･
+							</button>
+              <!-- ドロップダウンメニュー -->
+							<ul data-dropdown-target="menu" class="hidden absolute right-0 top-10 bg-white border border-gray-200 rounded shadow-lg">
+								<li>
+									<%= button_to "削除", chat_thread_path(current_thread&.id), 
+										method: :delete, 
+										data: { confirm: "このスレッドを削除してもよろしいですか？" },
+										class: "block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left cursor-pointer" %>
+								<%# </li>
+							</ul>
+            </div> %>
           </li>
         <% end %>
       </ul>

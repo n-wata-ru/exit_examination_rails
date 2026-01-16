@@ -7,15 +7,6 @@
                  current_thread: @current_thread %>
       
       <div class="flex-1 flex flex-col bg-white">
-        <!-- スレッドヘッダー -->
-        <div class="bg-white border-b border-gray-300 p-4 flex justify-between items-center">
-          <h3 class="text-lg font-semibold"><%= @current_thread.title %></h3>
-          <%= button_to "削除", chat_thread_path(@current_thread), 
-              method: :delete, 
-              data: { confirm: "このスレッドを削除してもよろしいですか？" },
-              class: "text-red-500 hover:text-red-700" %>
-        </div>
-        
         <%= render 'chat_threads/message_list', messages: @messages %>
         <%= render 'chat_threads/message_form', 
                    current_thread: @current_thread,
