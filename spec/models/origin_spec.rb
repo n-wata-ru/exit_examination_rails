@@ -18,7 +18,7 @@ RSpec.describe Origin, type: :model do
         Origin.create!(country: 'Japan', geonames_id: 123)
         duplicate = Origin.new(country: 'Brazil', geonames_id: 123)
         expect(duplicate).not_to be_valid
-        expect(duplicate.errors[:geonames_id]).to include('has already been taken')
+        expect(duplicate.errors[:geonames_id]).to include('はすでに存在します')
       end
     end
 

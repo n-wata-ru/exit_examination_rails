@@ -38,4 +38,8 @@ Rails.application.routes.draw do
     end
   end
   resources :chat_messages, only: [ :create ], controller: "chat_messages"
+
+  # その他のルーティング
+  get "policies/terms-of-service", to: "policies#terms_of_service"
+  get "policies/privacy-policy", to: "policies#privacy_policy"
 end
