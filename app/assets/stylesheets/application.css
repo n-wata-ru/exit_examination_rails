@@ -22,3 +22,8 @@ html {
 .star-rating input[type="radio"]:checked + label {
   color: #FBBF24; /* チェックされた星自身 */
 }
+
+/* ヘッダースクロール時のアニメーション */
+.header-hidden {
+  transform: translateY(-100%);
+}
