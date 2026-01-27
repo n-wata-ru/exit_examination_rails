@@ -3,7 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
     this.lastScrollY = window.scrollY
-    this.threshold = 50
+    // スクロール開始のしきい値
+    this.threshold = 50 
     
     window.addEventListener('scroll', this.handleScroll.bind(this))
   }
