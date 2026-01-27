@@ -55,7 +55,7 @@ export default class extends Controller {
     contentContainer.className = "inline-block max-w-md p-3 rounded-lg bg-white border border-gray-300"
     
     const contentElement = document.createElement("p")
-    contentElement.className = "text-sm"
+    contentElement.className = "text-sm wrap-break-word text-left whitespace-pre-wrap"
     contentElement.textContent = ""
     
     const loadingDiv = document.createElement("div")
@@ -91,6 +91,9 @@ export default class extends Controller {
         // 文字を追加
         contentElement.textContent += data.content
         messagesContainer.scrollTop = messagesContainer.scrollHeight
+      } else if (data.status === "connected") {
+        // 接続確立メッセージは無視（ログのみ）
+        console.log("SSE connection established")
       }
     })
     
