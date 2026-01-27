@@ -51,16 +51,5 @@ module OpenAi
         raise
       end
     end
-
-    def analyze_coffee_beans(messages:)
-      @client.chat(
-        parameters: {
-          model: "gpt-40",
-          messages: messages,
-          temperature: 0.7,
-          stream: proc { |chunk, _bytesize| yield chunk if block_given? }
-        }
-      )
-    end
   end
 end
