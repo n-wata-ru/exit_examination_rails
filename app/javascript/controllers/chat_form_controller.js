@@ -91,6 +91,9 @@ export default class extends Controller {
         // 文字を追加
         contentElement.textContent += data.content
         messagesContainer.scrollTop = messagesContainer.scrollHeight
+      } else if (data.status === "connected") {
+        // 接続確立メッセージは無視（ログのみ）
+        console.log("SSE connection established")
       }
     })
     
