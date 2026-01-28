@@ -2,8 +2,6 @@ class ChatThreadsController < ApplicationController
   before_action :authenticate_user!
   before_action :disable_rack_lock, only: [ :stream ]
 
-  require_relative "concerns/sse"
-
   def index
     @chat_threads = current_user.chat_threads.order(updated_at: :desc)
     @current_thread = @chat_threads.first

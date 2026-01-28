@@ -1,0 +1,24 @@
+<div id="token-info" class="mt-2">
+  <% if user.admin? %>
+    <div class="flex items-center">
+      <p class="text-xs text-[#be9d79] font-medium">管理者モード（制限なし）</p>
+    </div>
+  <% else %>
+    <div class="space-y-2">
+      <div class="flex items-center justify-between">
+        <% if user.is_chat_limited? %>
+					<div class="text-xs text-red-600 flex items-center">
+						利用制限に達しました。毎月1日にリセットされます。
+					</div>
+        <% else %>
+					<p class="text-xs text-[#be9d79]">
+						残トークン: <span class="font-bold text-xs"><%= user.remaining_tokens %></span> / <%= User::CHAT_TOKEN_LIMIT %>
+					</p>
+					<p class="text-xs text-[#be9d79]">
+						リセット日: 毎月1日 0:00
+					</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
