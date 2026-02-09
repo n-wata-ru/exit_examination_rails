@@ -23,10 +23,16 @@ class ChatThreadsController < ApplicationController
     response.headers["Cache-Control"] = "no-cache"
     response.headers["X-Accel-Buffering"] = "no"
 
+    # システムプロンプトを生成（コーヒーデータを含む）
+    system_prompt = CoffeeContext::PromptBuilder.new(current_user).build
+
     # メッセージ履歴を取得
     messages = @chat_thread.chat_messages.order(:created_at).pluck(:role, :content).map do |role, message_content|
       { role: role, content: message_content }
     end
+
+    # システムプロンプトをメッセージ配列の先頭に追加
+    messages.unshift({ role: "system", content: system_prompt })
 
     full_text = +""
     service = OpenAi::ChatService.new
