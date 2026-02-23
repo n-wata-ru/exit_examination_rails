@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyCoffeeNote - コーヒー豆の好みを記録・分析・発見</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-sm">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <%= image_tag "coffee_beans_image.png", alt: "MyCoffeeNote", class: "h-8 w-8 mr-3" %>
+          <h1 class="text-2xl font-bold text-gray-800">MyCoffeeNote</h1>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+          <%= link_to "ログイン", new_user_session_path, class: "text-indigo-600 hover:text-indigo-800 font-medium transition duration-200" %>
+          <%= link_to "無料登録", new_user_registration_path, class: "bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition duration-200 font-medium" %>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">
+        コーヒー豆の好みを<br>記録・分析・発見
+      </h2>
+      <p class="text-xl md:text-2xl mb-8 text-indigo-100">
+        あなただけのコーヒー体験を記録し、AIが最適な豆をおすすめします
+      </p>
+      
+      <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
+        <%= link_to "今すぐ始める（無料）", new_user_registration_path, 
+            class: "bg-white text-indigo-600 px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-100 transition duration-200 shadow-lg" %>
+        <%= link_to "すでにアカウントをお持ちの方", new_user_session_path, 
+            class: "text-white border-2 border-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-white hover:text-indigo-600 transition duration-200" %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20">
+    <div class="container mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center text-gray-800 mb-16">
+        MyCoffeeNoteでできること
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <!-- Feature 1 -->
+        <div class="text-center">
+          <div class="bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="text-4xl">☕</span>
+          </div>
+          <h4 class="text-xl font-bold text-gray-800 mb-4">豆の記録管理</h4>
+          <p class="text-gray-600">
+            購入したコーヒー豆の品種・焙煎度・精製方法・農園情報を詳細に記録。
+            いつでも過去の購入履歴を確認できます。
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="text-center">
+          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="text-4xl">🌍</span>
+          </div>
+          <h4 class="text-xl font-bold text-gray-800 mb-4">産地の可視化</h4>
+          <p class="text-gray-600">
+            地図上で産地を表示して、あなたの好みの傾向を視覚的に把握。
+            新しい産地の発見にも役立ちます。
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="text-center">
+          <div class="bg-yellow-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="text-4xl">🤖</span>
+          </div>
+          <h4 class="text-xl font-bold text-gray-800 mb-4">AI好み分析</h4>
+          <p class="text-gray-600">
+            ChatGPTと連携して、あなたの好みを分析。
+            記録データを基に最適なコーヒー豆をおすすめします。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Use Section -->
+  <section class="bg-gray-100 py-20">
+    <div class="container mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center text-gray-800 mb-16">
+        簡単4ステップで始めよう
+      </h3>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Step 1 -->
+          <div class="text-center">
+            <div class="bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-xl font-bold">1</span>
+            </div>
+            <h4 class="font-bold text-gray-800 mb-2">アカウント作成</h4>
+            <p class="text-gray-600 text-sm">無料でアカウントを作成し、ログイン</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="text-center">
+            <div class="bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-xl font-bold">2</span>
+            </div>
+            <h4 class="font-bold text-gray-800 mb-2">豆を登録</h4>
+            <p class="text-gray-600 text-sm">購入した豆の詳細情報を入力・保存</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="text-center">
+            <div class="bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-xl font-bold">3</span>
+            </div>
+            <h4 class="font-bold text-gray-800 mb-2">感想記録</h4>
+            <p class="text-gray-600 text-sm">テイスティングノートで味や香りを記録</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="text-center">
+            <div class="bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-xl font-bold">4</span>
+            </div>
+            <h4 class="font-bold text-gray-800 mb-2">AI分析</h4>
+            <p class="text-gray-600 text-sm">AIがあなたの好みを分析してレコメンド</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Users Section -->
+  <section class="py-20">
+    <div class="container mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center text-gray-800 mb-16">
+        こんな方におすすめです
+      </h3>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex items-start">
+              <div class="text-green-500 text-2xl mr-4">✓</div>
+              <div>
+                <h4 class="font-bold text-gray-800 mb-2">自宅でコーヒーを楽しむ人</h4>
+                <p class="text-gray-600">豆を買って家で淹れる方に最適です</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex items-start">
+              <div class="text-green-500 text-2xl mr-4">✓</div>
+              <div>
+                <h4 class="font-bold text-gray-800 mb-2">好みの豆を見つけたい人</h4>
+                <p class="text-gray-600">自分の好みを深掘りしたい方</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex items-start">
+              <div class="text-green-500 text-2xl mr-4">✓</div>
+              <div>
+                <h4 class="font-bold text-gray-800 mb-2">購入履歴を管理したい人</h4>
+                <p class="text-gray-600">どの豆を買ったか忘れがちな方</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex items-start">
+              <div class="text-green-500 text-2xl mr-4">✓</div>
+              <div>
+                <h4 class="font-bold text-gray-800 mb-2">信頼できる店を見つけたい人</h4>
+                <p class="text-gray-600">良い焙煎士やお店を記録したい方</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-indigo-600 text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold mb-6">
+        今日からあなたのコーヒー体験を記録しませんか？
+      </h3>
+      <p class="text-xl mb-8 text-indigo-100">
+        無料で始めて、AIがあなた専用のコーヒーガイドになります
+      </p>
+      
+      <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
+        <%= link_to "無料で始める", new_user_registration_path, 
+            class: "bg-white text-indigo-600 px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-100 transition duration-200 shadow-lg" %>
+        <%= link_to "ログイン", new_user_session_path, 
+            class: "text-white border-2 border-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-white hover:text-indigo-600 transition duration-200" %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-300 py-12">
+    <div class="container mx-auto px-6">
+      <div class="text-center">
+        <div class="flex items-center justify-center mb-4">
+          <%= image_tag "coffee_beans_image.png", alt: "MyCoffeeNote", class: "h-8 w-8 mr-3" %>
+          <h4 class="text-2xl font-bold text-white">MyCoffeeNote</h4>
+        </div>
+        <p class="text-gray-400 mb-6">
+          コーヒー豆の好みを記録・分析・発見するWebアプリ
+        </p>
+        <div class="flex justify-center space-x-6">
+          <%= link_to "利用規約", policies_terms_of_service_path, class: "hover:text-white transition duration-200" %>
+          <%= link_to "プライバシーポリシー", policies_privacy_policy_path, class: "hover:text-white transition duration-200" %>
+        </div>
+        <div class="mt-8 pt-8 border-t border-gray-700">
+          <p class="text-gray-400">&copy; 2024 MyCoffeeNote. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
