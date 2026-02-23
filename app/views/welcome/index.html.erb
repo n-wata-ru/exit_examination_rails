@@ -1,0 +1,167 @@
+<!-- 使い方説明ページ -->
+<div class="min-h-screen bg-gray-50">
+  <!-- Hero Section -->
+  <section class="bg-white">
+    <div class="container mx-auto px-6 py-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+        MyCoffeeNote
+      </h1>
+      <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        コーヒー豆の好みを記録・可視化・分析する、コーヒー愛好家のための専用アプリ
+      </p>
+      
+      <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+        <%= link_to "無料で始める", new_user_registration_path, 
+            class: "inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-700 transition duration-200" %>
+        <%= link_to "ログイン", new_user_session_path, 
+            class: "inline-block border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition duration-200" %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">主な機能</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          MyCoffeeNoteで、あなたのコーヒー体験をより豊かにしましょう
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- 豆の記録管理 -->
+        <div class="bg-white rounded-lg p-6 shadow-lg text-center">
+          <div class="text-4xl mb-4">☕</div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">豆の記録管理</h3>
+          <p class="text-gray-600">
+            購入した豆の品種・焙煎度・精製方法・農園情報、そして味の感想や評価を詳細に記録できます。
+          </p>
+        </div>
+
+        <!-- 産地可視化 -->
+        <div class="bg-white rounded-lg p-6 shadow-lg text-center">
+          <div class="text-4xl mb-4">🌍</div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">産地可視化</h3>
+          <p class="text-gray-600">
+            地図上に産地を表示して、あなたの好みの傾向を視覚的に把握できます。
+          </p>
+        </div>
+
+        <!-- AI好み分析 -->
+        <div class="bg-white rounded-lg p-6 shadow-lg text-center">
+          <div class="text-4xl mb-4">🤖</div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">AI好み分析</h3>
+          <p class="text-gray-600">
+            ChatGPT連携により、あなたの好みを分析しておすすめの豆を提案します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Use Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">使い方</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          簡単4ステップで、コーヒー豆の記録を始められます
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div class="text-center">
+          <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-indigo-600">1</span>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">アカウント作成</h3>
+          <p class="text-gray-600 text-sm">無料でアカウントを作成し、すぐに利用開始</p>
+        </div>
+
+        <div class="text-center">
+          <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-indigo-600">2</span>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">豆の情報登録</h3>
+          <p class="text-gray-600 text-sm">購入した豆の基本情報や購入店舗を入力</p>
+        </div>
+
+        <div class="text-center">
+          <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-indigo-600">3</span>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">味の感想記録</h3>
+          <p class="text-gray-600 text-sm">飲んだ感想や味の評価をメモとして保存</p>
+        </div>
+
+        <div class="text-center">
+          <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-indigo-600">4</span>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">分析・発見</h3>
+          <p class="text-gray-600 text-sm">AI分析で好みの傾向を把握し新しい豆を発見</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Users Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">こんな方におすすめ</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg p-6 shadow-lg">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">✅ 対象の方</h3>
+            <ul class="space-y-2 text-gray-600">
+              <li>• 豆を買って自宅でコーヒーを楽しむ方</li>
+              <li>• 好みの豆・焙煎・精製・農園を深掘りしたい方</li>
+              <li>• 接客の良いお店や信頼できる焙煎士を見つけたい方</li>
+            </ul>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-lg">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">解決する課題</h3>
+            <ul class="space-y-2 text-gray-600">
+              <li>• 個性的な豆の名前や情報が覚えづらい</li>
+              <li>• 以前飲んだ美味しい豆が思い出せない</li>
+              <li>• 好みに合わない豆を購入してしまう</li>
+              <li>• 店員との会話で好みを伝えるのが難しい</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-indigo-600">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">
+        今すぐMyCoffeeNoteを始めましょう
+      </h2>
+      <p class="text-indigo-100 mb-8 max-w-2xl mx-auto">
+        無料でアカウントを作成して、あなたのコーヒー体験をより豊かにしませんか？
+      </p>
+      
+      <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+        <%= link_to "無料で始める", new_user_registration_path, 
+            class: "inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition duration-200" %>
+        <%= link_to "ログイン", new_user_session_path, 
+            class: "inline-block border border-indigo-400 text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-500 transition duration-200" %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white py-8 border-t">
+    <div class="container mx-auto px-6 text-center">
+      <p class="text-gray-600 text-sm">
+        <%= link_to "利用規約", policies_terms_of_service_path, class: "hover:text-gray-800" %> • 
+        <%= link_to "プライバシーポリシー", policies_privacy_policy_path, class: "hover:text-gray-800" %>
+      </p>
+    </div>
+  </footer>
+</div>

@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   # ログイン後のホーム画面
   get "home/index"
+  
+  # 使い方説明ページ
+  get "welcome/index"
 
   # ログイン済みユーザーのルート
   authenticated :user do
@@ -16,9 +19,7 @@ Rails.application.routes.draw do
 
   # ログインしていないユーザーのルート
   unauthenticated do
-    devise_scope :user do
-      root to: "devise/sessions#new"
-    end
+    root to: "welcome#index"
   end
 
   # コーヒー豆管理機能のルーティング
