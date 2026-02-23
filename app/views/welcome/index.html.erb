@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-full">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MyCoffeeNote - コーヒー好み分析メモアプリ</title>
+    <meta name="description" content="コーヒー豆の好みを記録・可視化・分析する、コーヒー愛好家のための専用Webアプリです。">
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token" content="<%= form_authenticity_token %>" />
+    <%= csp_meta_tag %>
+    
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="h-full bg-gradient-to-br from-amber-50 to-orange-50">
+    <!-- Hero Section -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header -->
+      <header class="bg-white/80 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+              <h1 class="text-2xl font-bold text-amber-900">☕ MyCoffeeNote</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+              <%= link_to "ログイン", new_user_session_path, 
+                  class: "px-4 py-2 text-amber-700 hover:text-amber-900 font-medium transition-colors duration-200" %>
+              <%= link_to "無料登録", new_user_registration_path, 
+                  class: "px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 font-medium transition-all duration-200 shadow-md hover:shadow-lg" %>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero Content -->
+      <main class="flex-1 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div class="text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-amber-900 mb-6">
+              コーヒー好みを<br class="md:hidden">記録・分析・発見
+            </h1>
+            <p class="text-xl text-amber-800 mb-8 max-w-3xl mx-auto leading-relaxed">
+              MyCoffeeNoteは、コーヒー豆の好みを記録・可視化・分析する、<br class="hidden md:block">
+              コーヒー愛好家のための専用Webアプリです
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <%= link_to "無料で始める", new_user_registration_path, 
+                  class: "px-8 py-3 bg-amber-600 text-white text-lg font-semibold rounded-lg hover:bg-amber-700 transition-all duration-200 shadow-lg hover:shadow-xl" %>
+              <%= link_to "ログインする", new_user_session_path, 
+                  class: "px-8 py-3 bg-transparent text-amber-700 text-lg font-semibold rounded-lg border-2 border-amber-600 hover:bg-amber-600 hover:text-white transition-all duration-200" %>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-amber-900 mb-4">3つの主要機能</h2>
+          <p class="text-lg text-amber-700 max-w-2xl mx-auto">
+            あなたのコーヒーライフをサポートする機能をご提供します
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- 豆の記録管理 -->
+          <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-6 shadow-lg border border-orange-100">
+            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-2xl">📝</span>
+            </div>
+            <h3 class="text-xl font-semibold text-amber-900 mb-3">豆の記録管理</h3>
+            <p class="text-amber-700 leading-relaxed">
+              購入した豆の品種・焙煎度・精製方法・農園情報を詳細に記録。飲んだ感想や味の評価も保存できます。
+            </p>
+          </div>
+
+          <!-- 産地可視化 -->
+          <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 shadow-lg border border-yellow-100">
+            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-2xl">🌍</span>
+            </div>
+            <h3 class="text-xl font-semibold text-amber-900 mb-3">産地可視化</h3>
+            <p class="text-amber-700 leading-relaxed">
+              コーヒー豆の産地を地図上に表示して、あなたの好みの傾向を視覚的に把握できます。
+            </p>
+          </div>
+
+          <!-- AI好み分析 -->
+          <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-6 shadow-lg border border-amber-100">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-2xl">🤖</span>
+            </div>
+            <h3 class="text-xl font-semibold text-amber-900 mb-3">AI好み分析</h3>
+            <p class="text-amber-700 leading-relaxed">
+              ChatGPT連携により、記録したデータから好み分析とおすすめ豆の提案を行います。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="py-16 bg-gradient-to-br from-orange-50 to-amber-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-amber-900 mb-4">使い方</h2>
+          <p class="text-lg text-amber-700 max-w-2xl mx-auto">
+            簡単4ステップでコーヒー好み分析を始められます
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-amber-800">1</span>
+            </div>
+            <h3 class="text-lg font-semibold text-amber-900 mb-2">アカウント登録</h3>
+            <p class="text-amber-700">無料でアカウントを作成</p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-amber-800">2</span>
+            </div>
+            <h3 class="text-lg font-semibold text-amber-900 mb-2">豆を登録</h3>
+            <p class="text-amber-700">購入した豆の情報を記録</p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-amber-800">3</span>
+            </div>
+            <h3 class="text-lg font-semibold text-amber-900 mb-2">感想を記録</h3>
+            <p class="text-amber-700">味や香りの印象を保存</p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-amber-800">4</span>
+            </div>
+            <h3 class="text-lg font-semibold text-amber-900 mb-2">分析・発見</h3>
+            <p class="text-amber-700">好み傾向とおすすめを確認</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Target Users Section -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-amber-900 mb-4">こんな方におすすめ</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center p-6">
+            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">☕</span>
+            </div>
+            <h3 class="text-lg font-semibold text-amber-900 mb-3">豆を買って楽しむ人</h3>
+            <p class="text-amber-700">自宅でコーヒーを淹れて楽しんでいる方</p>
+          </div>
+
+          <div class="text-center p-6">
+            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">🔍</span>
+            </div>
+            <h3 class="text-lg font-semibold text-amber-900 mb-3">好みを深掘りしたい人</h3>
+            <p class="text-amber-700">好みの豆・焙煎・精製・農園を探求したい方</p>
+          </div>
+
+          <div class="text-center p-6">
+            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">🏪</span>
+            </div>
+            <h3 class="text-lg font-semibold text-amber-900 mb-3">お店を開拓したい人</h3>
+            <p class="text-amber-700">信頼できる焙煎士やお店を見つけたい方</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-br from-amber-100 to-orange-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-amber-900 mb-4">
+          コーヒーライフを<br class="md:hidden">もっと楽しく
+        </h2>
+        <p class="text-lg text-amber-700 mb-8 max-w-2xl mx-auto">
+          あなただけのコーヒー好み分析を始めませんか？<br>
+          今すぐ無料でアカウントを作成して、理想のコーヒーを見つけましょう。
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <%= link_to "無料で始める", new_user_registration_path, 
+              class: "px-8 py-3 bg-amber-600 text-white text-lg font-semibold rounded-lg hover:bg-amber-700 transition-all duration-200 shadow-lg hover:shadow-xl" %>
+          <%= link_to "ログインする", new_user_session_path, 
+              class: "px-8 py-3 bg-transparent text-amber-700 text-lg font-semibold rounded-lg border-2 border-amber-600 hover:bg-amber-600 hover:text-white transition-all duration-200" %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-amber-900 text-amber-100 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-lg font-semibold mb-4">☕ MyCoffeeNote</p>
+          <div class="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
+            <%= link_to "利用規約", policies_terms_of_service_path, 
+                class: "hover:text-amber-300 transition-colors duration-200" %>
+            <%= link_to "プライバシーポリシー", policies_privacy_policy_path, 
+                class: "hover:text-amber-300 transition-colors duration-200" %>
+          </div>
+          <p class="text-xs text-amber-300 mt-4">
+            © 2025 MyCoffeeNote. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
