@@ -14,11 +14,12 @@ Rails.application.routes.draw do
     root to: "coffee_beans#index", as: :authenticated_root
   end
 
+  # 使い方説明ページ（未ログインユーザー向け）
+  get "welcome/index"
+
   # ログインしていないユーザーのルート
   unauthenticated do
-    devise_scope :user do
-      root to: "devise/sessions#new"
-    end
+    root to: "welcome#index"
   end
 
   # コーヒー豆管理機能のルーティング
