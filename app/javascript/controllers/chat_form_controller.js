@@ -6,9 +6,13 @@ export default class extends Controller {
 
   connect() {
     console.log("Chat form controller connected, thread ID:", this.threadIdValue)
-    
-    // MutationObserverでトリガー要素を監視
+
     const messagesContainer = document.getElementById("messages")
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight
+    }
+
+    // MutationObserverでトリガー要素を監視
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
