@@ -22,7 +22,11 @@ Rails.application.routes.draw do
   end
 
   # コーヒー豆管理機能のルーティング
-  resources :coffee_beans, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
+  resources :coffee_beans, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
+    collection do
+      post :extract_from_image
+    end
+  end
 
   # テイスティングノート管理機能のルーティング
   resources :tasting_notes, only: [ :index, :show ]
