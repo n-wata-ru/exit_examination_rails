@@ -1,4 +1,6 @@
-<%= form_with model: @coffee_bean, local: true do |f| %>
+<% enable_image_recognition = local_assigns.fetch(:enable_image_recognition, false) %>
+<%= form_with model: @coffee_bean, local: true,
+    data: enable_image_recognition ? { controller: "coffee-image-recognition", coffee_image_recognition_url_value: extract_from_image_coffee_beans_path } : {} do |f| %>
   <!-- エラーメッセージ -->
   <% if @coffee_bean.errors.any? %>
     <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
@@ -14,33 +16,42 @@
   <% end %>
 
   <div class="space-y-6">
-    <!-- コーヒー名 -->
-    <div>
-      <%= f.label :name, "コーヒー名", class: "block text-sm font-medium text-gray-700 mb-2" %>
-      <%= f.text_field :name, 
-          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200",
-          placeholder: "例：エチオピア イルガチェフェ" %>
-    </div>
-
     <!-- 画像 -->
     <div>
       <%= f.label :image, "画像", class: "block text-sm font-medium text-gray-700 mb-2" %>
-      <%= f.file_field :image, 
+      <% if enable_image_recognition %>
+        <p class="text-xs text-gray-500 mb-2">パッケージの画像をアップロードすると、AIが文字を読み取り下の項目に自動入力します。</p>
+      <% end %>
+      <%= f.file_field :image,
           accept: "image/*",
-          class: "w-full bg-gray-200 hover:bg-gray-300 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer" %>
-      <% if @coffee_bean.image.attached? && @coffee_bean.image.attached? %>
+          class: "w-full bg-gray-200 hover:bg-gray-300 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer",
+          **(enable_image_recognition ? { data: { coffee_image_recognition_target: "input", action: "change->coffee-image-recognition#analyze" } } : {}) %>
+      <% if enable_image_recognition %>
+        <p data-coffee-image-recognition-target="status" class="text-sm text-gray-600 mt-2"></p>
+      <% end %>
+      <% if @coffee_bean.image.attached? %>
         <div class="mt-2">
           <%= image_tag @coffee_bean.image.variant(resize_to_limit: [200, 200]), class: "rounded-lg" %>
         </div>
       <% end %>
     </div>
 
+    <!-- コーヒー名 -->
+    <div>
+      <%= f.label :name, "コーヒー名", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= f.text_field :name,
+          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200",
+          placeholder: "例：エチオピア イルガチェフェ",
+          **(enable_image_recognition ? { data: { coffee_image_recognition_target: "name" } } : {}) %>
+    </div>
+
     <!-- 産地 -->
     <div>
       <%= f.label :origin_id, "産地", class: "block text-sm font-medium text-gray-700 mb-2" %>
-      <%= f.collection_select :origin_id, @origins, :id, :country, 
+      <%= f.collection_select :origin_id, @origins, :id, :country,
           { prompt: "産地を選択してください" },
-          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer" %>
+          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer",
+          **(enable_image_recognition ? { data: { coffee_image_recognition_target: "origin" } } : {}) %>
     </div>
 
     <!-- 品種 -->
@@ -48,16 +59,18 @@
       <%= f.label :variety, "品種", class: "block text-sm font-medium text-gray-700 mb-2" %>
       <%= f.text_field :variety,
           class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200",
-          placeholder: "例：ゲイシャ、ティピカ、ブルボン、カトゥアイ、ロブスタ" %>
+          placeholder: "例：ゲイシャ、ティピカ、ブルボン、カトゥアイ、ロブスタ",
+          **(enable_image_recognition ? { data: { coffee_image_recognition_target: "variety" } } : {}) %>
     </div>
 
     <!-- 処理方法 -->
     <div>
       <%= f.label :process, "処理・精製方法", class: "block text-sm font-medium text-gray-700 mb-2" %>
-      <%= f.select :process, 
+      <%= f.select :process,
           ["ナチュラル", "ウォッシュド", "ハニー", "アナエロビック", "カーボニックマセレーション", "スマトラ式", "その他"],
           { include_blank: "処理方法を選択してください" },
-          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer" %>
+          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer",
+          **(enable_image_recognition ? { data: { coffee_image_recognition_target: "process" } } : {}) %>
     </div>
 
     <!-- 焙煎度 -->
@@ -66,7 +79,8 @@
       <%= f.select :roast_level,
           ["浅煎り", "中煎り", "中深煎り", "深煎り"],
           { include_blank: "焙煎度を選択してください" },
-          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer" %>
+          class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 cursor-pointer",
+          **(enable_image_recognition ? { data: { coffee_image_recognition_target: "roastLevel" } } : {}) %>
     </div>
     <!-- 焙煎度（詳細） -->
     <%# <%= f.select :roast_level,
@@ -79,7 +93,8 @@
       <%= f.label :notes, "メモ", class: "block text-sm font-medium text-gray-700 mb-2" %>
       <%= f.text_area :notes, rows: 4,
           class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200",
-          placeholder: "コーヒーに関するメモや感想を記入してください" %>
+          placeholder: "コーヒーに関するメモや感想を記入してください",
+          **(enable_image_recognition ? { data: { coffee_image_recognition_target: "notes" } } : {}) %>
     </div>
 
     <!-- ボタン -->
