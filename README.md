@@ -76,6 +76,32 @@
 
 ---
 
+## セットアップ
+
+基本的にはDockerでアプリケーションを起動します。
+
+```sh
+docker compose up
+```
+
+初回起動時やGemfile変更後は、`bundle_data` ボリュームが古いgemを持ったままになりコンテナが起動に失敗することがあります。その場合は以下を実行してからもう一度 `docker compose up` してください。
+
+```sh
+docker compose run --rm web bundle install
+```
+
+### Dockerを使わずホストで直接動かす場合
+
+Gemfileの依存gemに加えて、以下のネイティブライブラリをローカル環境に別途インストールしてください（Docker経由の場合は `Dockerfile.dev` に含まれているため不要です）。
+
+| ライブラリ | 用途 | インストール方法（macOS / Homebrew） |
+|------------|------|----------------------------------------|
+| libvips    | ActiveStorageの画像バリアント生成（`image_processing` gemが利用） | `brew install vips` |
+
+未インストールの場合、画像アップロード後のサムネイル表示時に `LoadError: Could not open library 'vips.42'` が発生します。
+
+---
+
 ## サービスの差別化ポイント・推しポイント
 
 - 類似アプリ
