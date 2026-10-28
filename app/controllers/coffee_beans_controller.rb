@@ -41,7 +41,28 @@ end
     redirect_to coffee_beans_path, notice: "コーヒー豆を削除しました"
   end
 
+  def extract_from_image
+    image_file = params.require(:image)
+    data_url = "data:#{image_file.content_type};base64,#{Base64.strict_encode64(image_file.read)}"
+
+    info = OpenAi::VisionService.new.extract_coffee_info(image_data_url: data_url)
+    info["origin_id"] = find_origin_id(info["origin_country"])
+
+    render json: info
+  rescue ActionController::ParameterMissing
+    render json: { error: "画像が選択されていません" }, status: :unprocessable_entity
+  rescue => e
+    Rails.logger.error("Image recognition failed: #{e.message}")
+    render json: { error: "画像の解析に失敗しました" }, status: :unprocessable_entity
+  end
+
   private
+
+  def find_origin_id(country)
+    return nil if country.blank?
+
+    Origin.where("LOWER(country) = ?", country.downcase).first&.id
+  end
 
   def set_coffee_bean
     @coffee_bean = current_user.coffee_beans.find(params[:id])

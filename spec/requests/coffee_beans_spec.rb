@@ -163,4 +163,63 @@ RSpec.describe "CoffeeBeans", type: :request do
       end
     end
   end
+
+  describe "POST /extract_from_image" do
+    let(:file) { fixture_file_upload('spec/fixtures/files/test_image.jpg', 'image/jpeg') }
+    let!(:origin) { Origin.create!(country: "Ethiopia") }
+
+    it "画像から抽出した情報と一致する産地IDをJSONで返すこと" do
+      allow_any_instance_of(OpenAi::VisionService).to receive(:extract_coffee_info).and_return(
+        {
+          "name" => "エチオピア イルガチェフェ",
+          "origin_country" => "Ethiopia",
+          "variety" => "ゲイシャ",
+          "process" => "ウォッシュド",
+          "roast_level" => "浅煎り",
+          "notes" => "フローラルな香り"
+        }
+      )
+
+      post extract_from_image_coffee_beans_path, params: { image: file }
+
+      expect(response).to have_http_status(:success)
+      json = JSON.parse(response.body)
+      expect(json["name"]).to eq("エチオピア イルガチェフェ")
+      expect(json["origin_id"]).to eq(origin.id)
+    end
+
+    it "一致する産地が存在しない場合はorigin_idがnilになること" do
+      allow_any_instance_of(OpenAi::VisionService).to receive(:extract_coffee_info).and_return(
+        { "name" => "", "origin_country" => "Unknown", "variety" => "", "process" => "", "roast_level" => "", "notes" => "" }
+      )
+
+      post extract_from_image_coffee_beans_path, params: { image: file }
+
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)["origin_id"]).to be_nil
+    end
+
+    it "画像が渡されなかった場合は422を返すこと" do
+      post extract_from_image_coffee_beans_path
+
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it "解析に失敗した場合は422とエラーメッセージを返すこと" do
+      allow_any_instance_of(OpenAi::VisionService).to receive(:extract_coffee_info).and_raise(StandardError.new("API error"))
+
+      post extract_from_image_coffee_beans_path, params: { image: file }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(JSON.parse(response.body)["error"]).to be_present
+    end
+
+    it "未ログインの場合はログイン画面にリダイレクトされること" do
+      delete destroy_user_session_path
+
+      post extract_from_image_coffee_beans_path, params: { image: file }
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end
